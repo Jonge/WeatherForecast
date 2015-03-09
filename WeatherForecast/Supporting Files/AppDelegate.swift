@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        configureAppearance()
         return true
     }
 
@@ -39,6 +39,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    private struct Appearance {
+        static let RegularFontName = "ProximaNova-Regular"
+        static let SemiboldFontName = "ProximaNova-Semibold"
+        static let BoldFontName = "ProximaNova-Bold"
+    }
+    
+    private func configureAppearance() {
+        self.window?.tintColor = UIColor(red: 47/255.0, green: 145/255.0, blue: 255/255.0, alpha: 1.0)
+        
+        // Navigation bar
+        let navigationTitleFont = UIFont(name: Appearance.SemiboldFontName, size: 18.0)
+        let navigationBarTitleAttributes = NSDictionary(object: navigationTitleFont!, forKey: NSFontAttributeName)
+        UINavigationBar.appearance().titleTextAttributes = navigationBarTitleAttributes
+        
+        let navigationBarBackground = UIImage(named: "Bar")?.resizableImageWithCapInsets(UIEdgeInsets(top: 1.0, left: 0.0, bottom: 0.0, right: 0.0))
+        let shadowImage = UIImage(named: "Line")
+        UINavigationBar.appearance().setBackgroundImage(navigationBarBackground, forBarMetrics: .Default)
+        UINavigationBar.appearance().shadowImage = shadowImage
+        
+        // Bar items
+        let barItemFont = UIFont(name: Appearance.SemiboldFontName, size: 16.0)
+        let barItemFontDictionary = NSDictionary(object: barItemFont!, forKey: NSFontAttributeName)
+        UIBarItem.appearance().setTitleTextAttributes(barItemFontDictionary, forState: .Normal)
     }
 
 
