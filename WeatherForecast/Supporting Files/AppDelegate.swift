@@ -42,13 +42,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private struct Appearance {
-        static let RegularFontName = "ProximaNova-Regular"
+        static let RegularFontName  = "ProximaNova-Regular"
         static let SemiboldFontName = "ProximaNova-Semibold"
-        static let BoldFontName = "ProximaNova-Bold"
+        static let BoldFontName     = "ProximaNova-Bold"
+        static let LightFontName    = "ProximaNova-Light"
     }
     
     private func configureAppearance() {
-        self.window?.tintColor = UIColor(red: 47/255.0, green: 145/255.0, blue: 255/255.0, alpha: 1.0)
+        window?.tintColor = UIColor(red: 47/255.0, green: 145/255.0, blue: 255/255.0, alpha: 1.0)
         
         // Navigation bar
         let navigationTitleFont = UIFont(name: Appearance.SemiboldFontName, size: 18.0)
