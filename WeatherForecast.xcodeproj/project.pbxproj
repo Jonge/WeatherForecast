@@ -14,7 +14,6 @@
 		BF5A745E1AAE2FB30060060A /* ForecastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5A745D1AAE2FB30060060A /* ForecastTableViewController.swift */; };
 		BF5A74601AAE2FD50060060A /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5A745F1AAE2FD50060060A /* SettingsTableViewController.swift */; };
 		BF5A74621AAE2FF30060060A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5A74611AAE2FF30060060A /* AppDelegate.swift */; };
-		BF5A74641AAE30010060060A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF5A74631AAE30010060060A /* Info.plist */; };
 		BF5A746E1AAE36390060060A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF1BD0441AADE3A200A62442 /* Main.storyboard */; };
 		BF5A746F1AAE363E0060060A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF1BD0491AADE3A200A62442 /* LaunchScreen.xib */; };
 		BF5A74701AAE37050060060A /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF5A746A1AAE31F80060060A /* ProximaNova-Bold.otf */; };
@@ -22,6 +21,11 @@
 		BF5A74721AAE37050060060A /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF5A746C1AAE31F80060060A /* ProximaNova-Regular.otf */; };
 		BF5A74731AAE37050060060A /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF5A746D1AAE31F80060060A /* ProximaNova-Semibold.otf */; };
 		BF5A74751AAE3A640060060A /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5A74741AAE3A640060060A /* LocationViewController.swift */; };
+		BF9960431AAF347800F31AF3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9960421AAF347800F31AF3 /* DataManager.swift */; };
+		BF9BB83A1AAF1A6C00CDA465 /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9BB8391AAF1A6C00CDA465 /* ForecastTableViewCell.swift */; };
+		BF9BB83C1AAF224800CDA465 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9BB83B1AAF224800CDA465 /* SettingsTableViewCell.swift */; };
+		BF9BB83E1AAF230600CDA465 /* GroupedTableSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9BB83D1AAF230600CDA465 /* GroupedTableSectionView.swift */; };
+		BFCFF7501AB307F800715388 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFCFF74E1AB307F800715388 /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +58,12 @@
 		BF5A746C1AAE31F80060060A /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Regular.otf"; path = "Resources/Fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		BF5A746D1AAE31F80060060A /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Semibold.otf"; path = "Resources/Fonts/ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
 		BF5A74741AAE3A640060060A /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationViewController.swift; path = Classes/Controllers/LocationViewController.swift; sourceTree = "<group>"; };
+		BF9960421AAF347800F31AF3 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = Classes/Models/DataManager.swift; sourceTree = "<group>"; };
+		BF9BB8391AAF1A6C00CDA465 /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForecastTableViewCell.swift; path = "Classes/Views/Table View Cells/ForecastTableViewCell.swift"; sourceTree = "<group>"; };
+		BF9BB83B1AAF224800CDA465 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewCell.swift; path = "Classes/Views/Table View Cells/SettingsTableViewCell.swift"; sourceTree = "<group>"; };
+		BF9BB83D1AAF230600CDA465 /* GroupedTableSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupedTableSectionView.swift; path = "Classes/Views/Table View Cells/GroupedTableSectionView.swift"; sourceTree = "<group>"; };
+		BFCFF74A1AB3020500715388 /* WeatherForecast-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeatherForecast-Bridging-Header.h"; sourceTree = "<group>"; };
+		BFCFF74F1AB307F800715388 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		E9E185B53E6A7F0677C9CDFB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -127,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				BF5A74611AAE2FF30060060A /* AppDelegate.swift */,
+				BFCFF74A1AB3020500715388 /* WeatherForecast-Bridging-Header.h */,
 				BF5A74631AAE30010060060A /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -162,6 +173,8 @@
 		BF1BD0611AADE5B700A62442 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BFCFF74E1AB307F800715388 /* DataModel.xcdatamodeld */,
+				BF9960421AAF347800F31AF3 /* DataManager.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -171,6 +184,7 @@
 			children = (
 				BF1BD0441AADE3A200A62442 /* Main.storyboard */,
 				BF1BD0491AADE3A200A62442 /* LaunchScreen.xib */,
+				BF9BB8381AAF1A4400CDA465 /* Table View Cells */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -204,6 +218,16 @@
 				BF5A746D1AAE31F80060060A /* ProximaNova-Semibold.otf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		BF9BB8381AAF1A4400CDA465 /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BF9BB8391AAF1A6C00CDA465 /* ForecastTableViewCell.swift */,
+				BF9BB83B1AAF224800CDA465 /* SettingsTableViewCell.swift */,
+				BF9BB83D1AAF230600CDA465 /* GroupedTableSectionView.swift */,
+			);
+			name = "Table View Cells";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,7 +276,7 @@
 		BF1BD0311AADE3A200A62442 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = STRV;
 				TargetAttributes = {
 					BF1BD0381AADE3A200A62442 = {
@@ -292,7 +316,6 @@
 				BF5A74711AAE37050060060A /* ProximaNova-Light.otf in Resources */,
 				BF5A74721AAE37050060060A /* ProximaNova-Regular.otf in Resources */,
 				BF5A74731AAE37050060060A /* ProximaNova-Semibold.otf in Resources */,
-				BF5A74641AAE30010060060A /* Info.plist in Resources */,
 				BF5A745A1AAE2E760060060A /* Images.xcassets in Resources */,
 				BF5A746E1AAE36390060060A /* Main.storyboard in Resources */,
 				BF5A746F1AAE363E0060060A /* LaunchScreen.xib in Resources */,
@@ -346,10 +369,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF9BB83A1AAF1A6C00CDA465 /* ForecastTableViewCell.swift in Sources */,
+				BFCFF7501AB307F800715388 /* DataModel.xcdatamodeld in Sources */,
 				BF5A74751AAE3A640060060A /* LocationViewController.swift in Sources */,
 				BF5A74601AAE2FD50060060A /* SettingsTableViewController.swift in Sources */,
 				BF5A745E1AAE2FB30060060A /* ForecastTableViewController.swift in Sources */,
+				BF9BB83C1AAF224800CDA465 /* SettingsTableViewCell.swift in Sources */,
 				BF5A745C1AAE2F8C0060060A /* TodayViewController.swift in Sources */,
+				BF9BB83E1AAF230600CDA465 /* GroupedTableSectionView.swift in Sources */,
+				BF9960431AAF347800F31AF3 /* DataManager.swift in Sources */,
 				BF5A74621AAE2FF30060060A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -474,10 +502,13 @@
 			baseConfigurationReference = B0274FA7245E864AA17D2FE9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/WeatherForecast/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WeatherForecast/WeatherForecast-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -486,10 +517,12 @@
 			baseConfigurationReference = 9B55F5421F79FC8D95212243 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/WeatherForecast/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WeatherForecast/WeatherForecast-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -558,6 +591,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BFCFF74E1AB307F800715388 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BFCFF74F1AB307F800715388 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = BFCFF74F1AB307F800715388 /* DataModel.xcdatamodel */;
+			name = DataModel.xcdatamodeld;
+			path = Classes/Models/DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BF1BD0311AADE3A200A62442 /* Project object */;
 }

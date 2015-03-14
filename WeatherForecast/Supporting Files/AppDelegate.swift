@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         configureAppearance()
+        DataManager.sharedManager.locationManager.startUpdatingLocation()
+        AFNetworkActivityIndicatorManager.sharedManager().enabled = true
         return true
     }
 
@@ -42,31 +44,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private struct Appearance {
-        static let RegularFontName  = "ProximaNova-Regular"
+        static let TintColor        = UIColor(red: 47/255.0, green: 145/255.0, blue: 255/255.0, alpha: 1.0)
+        static let RegularFontName  = "ProximaNova"
         static let SemiboldFontName = "ProximaNova-Semibold"
         static let BoldFontName     = "ProximaNova-Bold"
         static let LightFontName    = "ProximaNova-Light"
     }
     
     private func configureAppearance() {
-        window?.tintColor = UIColor(red: 47/255.0, green: 145/255.0, blue: 255/255.0, alpha: 1.0)
+        window?.tintColor = Appearance.TintColor
         
         // Navigation bar
-        let navigationTitleFont = UIFont(name: Appearance.SemiboldFontName, size: 18.0)
-        let navigationBarTitleAttributes = NSDictionary(object: navigationTitleFont!, forKey: NSFontAttributeName)
+        let navigationTitleFont = UIFont(name: Appearance.SemiboldFontName, size: 18.0)!
+        let navigationBarTitleAttributes = NSDictionary(object: navigationTitleFont, forKey: NSFontAttributeName)
         UINavigationBar.appearance().titleTextAttributes = navigationBarTitleAttributes
         
-        let navigationBarBackground = UIImage(named: "Bar")?.resizableImageWithCapInsets(UIEdgeInsets(top: 1.0, left: 0.0, bottom: 0.0, right: 0.0))
+        let navigationBarBackground = UIImage(named: "White")
         let shadowImage = UIImage(named: "Line")
         UINavigationBar.appearance().setBackgroundImage(navigationBarBackground, forBarMetrics: .Default)
         UINavigationBar.appearance().shadowImage = shadowImage
         
         // Bar items
-        let barItemFont = UIFont(name: Appearance.SemiboldFontName, size: 16.0)
-        let barItemFontDictionary = NSDictionary(object: barItemFont!, forKey: NSFontAttributeName)
-        UIBarItem.appearance().setTitleTextAttributes(barItemFontDictionary, forState: .Normal)
+        let barItemFont = UIFont(name: Appearance.SemiboldFontName, size: 16.0)!
+        let barItemFontDictionary = NSDictionary(object: barItemFont, forKey: NSFontAttributeName)
+        UIBarButtonItem.appearance().setTitleTextAttributes(barItemFontDictionary, forState: .Normal)
     }
-
 
 }
 
