@@ -31,7 +31,7 @@ class GroupedTableSectionView: UIView {
         // Add constraints
         textLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         
-        let viewBindingsDictionary = ["textLabel" : textLabel]
+        let viewBindingsDictionary = ["textLabel": textLabel]
         
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(15)-[textLabel]-(15)-|", options: nil, metrics: nil, views: viewBindingsDictionary))
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(25)-[textLabel]-(5)-|", options: nil, metrics: nil, views: viewBindingsDictionary))
@@ -51,7 +51,7 @@ class GroupedTableSectionView: UIView {
     }
     
     override func intrinsicContentSize() -> CGSize {
-        return CGSize(width: sectionTextLabel.frame.size.width + 30.0, height: sectionTextLabel.frame.size.height + 20)
+        return CGSize(width: sectionTextLabel.frame.size.width + 30.0, height: sectionTextLabel.frame.size.height + 30.0)
     }
 
 }

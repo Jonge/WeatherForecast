@@ -8,14 +8,18 @@
     <customFonts key="customFonts">
         <mutableArray key="ProximaNova-Light.otf">
             <string>ProximaNova-Light</string>
+            <string>ProximaNova-Light</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Regular.otf">
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
             <string>ProximaNova-Regular</string>
+            <string>ProximaNova-Regular</string>
         </mutableArray>
         <mutableArray key="ProximaNova-Semibold.otf">
+            <string>ProximaNova-Semibold</string>
+            <string>ProximaNova-Semibold</string>
             <string>ProximaNova-Semibold</string>
             <string>ProximaNova-Semibold</string>
             <string>ProximaNova-Semibold</string>
@@ -151,7 +155,114 @@
                     <view key="view" contentMode="scaleToFill" id="b11-aW-M7J">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="T3e-Sq-Uf7">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LocationCell" rowHeight="90" id="1UQ-Ge-Kf6" customClass="LocationTableViewCell" customModule="WeatherForecast" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1UQ-Ge-Kf6" id="Pdv-vK-tGu">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nG3-Jq-Ufp">
+                                                    <rect key="frame" x="15" y="15" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="1dv-AX-bqK"/>
+                                                        <constraint firstAttribute="height" constant="60" id="4sR-wB-72a"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abl-ek-gLJ">
+                                                    <rect key="frame" x="90" y="24" width="64" height="41"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVo-G3-cJk">
+                                                            <rect key="frame" x="0.0" y="0.0" width="32" height="18"/>
+                                                            <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="18"/>
+                                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CurrentLocation" translatesAutoresizingMaskIntoConstraints="NO" id="HhU-Lx-xw7">
+                                                            <rect key="frame" x="37" y="4" width="11" height="11"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="11" id="X39-9W-yZb"/>
+                                                                <constraint firstAttribute="height" constant="11" id="xOZ-rX-Aan"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Condition" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUo-aX-Oec">
+                                                            <rect key="frame" x="0.0" y="26" width="64" height="15"/>
+                                                            <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="15"/>
+                                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="HhU-Lx-xw7" firstAttribute="leading" secondItem="nVo-G3-cJk" secondAttribute="trailing" constant="5" id="EZP-WR-WX3"/>
+                                                        <constraint firstItem="nVo-G3-cJk" firstAttribute="centerY" secondItem="HhU-Lx-xw7" secondAttribute="centerY" id="OaI-bY-JeB"/>
+                                                        <constraint firstItem="iUo-aX-Oec" firstAttribute="leading" secondItem="Abl-ek-gLJ" secondAttribute="leading" id="ZZr-R3-sja"/>
+                                                        <constraint firstItem="nVo-G3-cJk" firstAttribute="leading" secondItem="Abl-ek-gLJ" secondAttribute="leading" id="dNO-DQ-uaA"/>
+                                                        <constraint firstItem="nVo-G3-cJk" firstAttribute="top" secondItem="Abl-ek-gLJ" secondAttribute="top" id="hRc-bO-CVf"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HhU-Lx-xw7" secondAttribute="trailing" id="q3n-OU-H9b"/>
+                                                        <constraint firstAttribute="trailing" secondItem="iUo-aX-Oec" secondAttribute="trailing" id="sr1-lq-01O"/>
+                                                        <constraint firstItem="iUo-aX-Oec" firstAttribute="top" secondItem="nVo-G3-cJk" secondAttribute="bottom" constant="8" id="xmi-nP-Fvc"/>
+                                                        <constraint firstAttribute="bottom" secondItem="iUo-aX-Oec" secondAttribute="bottom" id="xos-IS-RWf"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="143-Rk-28f">
+                                                    <rect key="frame" x="504" y="17" width="81" height="55"/>
+                                                    <fontDescription key="fontDescription" name="ProximaNova-Light" family="Proxima Nova" pointSize="55"/>
+                                                    <color key="textColor" red="0.1843137255" green="0.56862745100000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="143-Rk-28f" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Abl-ek-gLJ" secondAttribute="trailing" constant="15" id="4oY-C5-9NZ"/>
+                                                <constraint firstItem="nG3-Jq-Ufp" firstAttribute="leading" secondItem="Pdv-vK-tGu" secondAttribute="leading" constant="15" id="ORL-iJ-qyA"/>
+                                                <constraint firstAttribute="centerY" secondItem="Abl-ek-gLJ" secondAttribute="centerY" id="Oz6-nL-7Kd"/>
+                                                <constraint firstAttribute="centerY" secondItem="143-Rk-28f" secondAttribute="centerY" id="TUx-7A-ead"/>
+                                                <constraint firstAttribute="centerY" secondItem="nG3-Jq-Ufp" secondAttribute="centerY" id="YbW-jt-oOa"/>
+                                                <constraint firstAttribute="trailing" secondItem="143-Rk-28f" secondAttribute="trailing" constant="15" id="oHf-dX-RA6"/>
+                                                <constraint firstItem="Abl-ek-gLJ" firstAttribute="leading" secondItem="nG3-Jq-Ufp" secondAttribute="trailing" constant="15" id="xAu-Ac-ahr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="90" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="conditionLabel" destination="iUo-aX-Oec" id="Jhk-1i-54t"/>
+                                            <outlet property="currentLocationImageView" destination="HhU-Lx-xw7" id="nOK-ct-TXR"/>
+                                            <outlet property="locationLabel" destination="nVo-G3-cJk" id="LvV-9G-vP3"/>
+                                            <outlet property="temperatureLabel" destination="143-Rk-28f" id="PvG-Iq-Ir7"/>
+                                            <outlet property="weatherImageView" destination="nG3-Jq-Ufp" id="bFc-aJ-DPf"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WhiteOverlay" translatesAutoresizingMaskIntoConstraints="NO" id="kVh-n8-ObS">
+                                <rect key="frame" x="0.0" y="405" width="600" height="195"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="195" id="h2m-Ja-wgw"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9b-dC-gU4">
+                                <rect key="frame" x="268" y="515" width="65" height="65"/>
+                                <state key="normal" image="AddButton">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BOE-bO-NBI" kind="presentation" id="ge8-D9-HMy"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kVh-n8-ObS" secondAttribute="trailing" id="FQh-nX-8ut"/>
+                            <constraint firstItem="T3e-Sq-Uf7" firstAttribute="leading" secondItem="kVh-n8-ObS" secondAttribute="leading" id="KYu-hH-d4J"/>
+                            <constraint firstAttribute="centerX" secondItem="Q9b-dC-gU4" secondAttribute="centerX" id="N9Y-hD-2xk"/>
+                            <constraint firstItem="x8e-ix-P30" firstAttribute="top" secondItem="Q9b-dC-gU4" secondAttribute="bottom" constant="20" id="aI2-aq-ej6"/>
+                            <constraint firstItem="T3e-Sq-Uf7" firstAttribute="bottom" secondItem="x8e-ix-P30" secondAttribute="top" id="bJG-2I-pCg"/>
+                            <constraint firstItem="x8e-ix-P30" firstAttribute="top" secondItem="kVh-n8-ObS" secondAttribute="bottom" id="btJ-qw-TYF"/>
+                            <constraint firstItem="kVh-n8-ObS" firstAttribute="leading" secondItem="b11-aW-M7J" secondAttribute="leading" id="osx-q8-8gn"/>
+                            <constraint firstItem="T3e-Sq-Uf7" firstAttribute="trailing" secondItem="kVh-n8-ObS" secondAttribute="trailing" id="rDb-cY-Ksx"/>
+                            <constraint firstItem="T3e-Sq-Uf7" firstAttribute="top" secondItem="b11-aW-M7J" secondAttribute="top" id="y4O-1N-qQp"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="rRB-vS-Oho">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="RxN-Xk-XGS">
@@ -160,10 +271,79 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="T3e-Sq-Uf7" id="maj-uL-cCo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yMV-Rp-JTG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2954" y="0.0"/>
+            <point key="canvasLocation" x="2954" y="-1"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fKz-uG-qoT">
+            <objects>
+                <navigationController id="BOE-bO-NBI" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="F2h-0w-txY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="leu-IE-FQ9" kind="relationship" relationship="rootViewController" id="8NU-Im-YeG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gNt-tp-r0H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3679" y="0.0"/>
+        </scene>
+        <!--Add Location-->
+        <scene sceneID="3Xu-b2-ejK">
+            <objects>
+                <tableViewController title="Add Location" id="leu-IE-FQ9" customClass="AddLocationTableViewController" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="AYm-NA-IXn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" id="1cJ-1f-d06" customClass="SearchItemTableViewCell" customModule="WeatherForecast" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1cJ-1f-d06" id="AXL-EZ-32a">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVX-pe-qFr">
+                                            <rect key="frame" x="35" y="14" width="550" height="16"/>
+                                            <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="yVX-pe-qFr" secondAttribute="centerY" id="Eog-Hy-ajB"/>
+                                        <constraint firstItem="yVX-pe-qFr" firstAttribute="leading" secondItem="AXL-EZ-32a" secondAttribute="leading" constant="35" id="dZN-3O-2I5"/>
+                                        <constraint firstAttribute="trailing" secondItem="yVX-pe-qFr" secondAttribute="trailing" constant="15" id="m6f-Av-Ibu"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <inset key="separatorInset" minX="35" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="locationLabel" destination="yVX-pe-qFr" id="Srx-fZ-gFE"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="leu-IE-FQ9" id="3Rw-ZY-bd9"/>
+                            <outlet property="delegate" destination="leu-IE-FQ9" id="7Wn-BZ-2XC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Bed-gw-3E0">
+                        <barButtonItem key="rightBarButtonItem" title="Close" style="done" id="Mup-rf-ocx">
+                            <connections>
+                                <action selector="closeButtonPressed:" destination="leu-IE-FQ9" id="F8q-Ry-qGO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dDn-Bp-Gef" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4418" y="0.0"/>
         </scene>
         <!--Settings-->
         <scene sceneID="yrX-fk-rab">
@@ -208,6 +388,26 @@
                                     <outlet property="unitLabel" destination="b9h-yH-Q8u" id="cpP-wa-8tE"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PickerViewCell" rowHeight="163" id="Kf7-QK-LKc" customClass="PickerViewTableViewCell" customModule="WeatherForecast" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kf7-QK-LKc" id="MrC-Xa-FMk">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7yM-81-3B7">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="162"/>
+                                        </pickerView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="7yM-81-3B7" firstAttribute="leading" secondItem="MrC-Xa-FMk" secondAttribute="leading" id="13p-ll-YDe"/>
+                                        <constraint firstAttribute="trailing" secondItem="7yM-81-3B7" secondAttribute="trailing" id="Qhl-d6-DdC"/>
+                                        <constraint firstAttribute="bottom" secondItem="7yM-81-3B7" secondAttribute="bottom" id="bAf-hL-de6"/>
+                                        <constraint firstItem="7yM-81-3B7" firstAttribute="top" secondItem="MrC-Xa-FMk" secondAttribute="top" id="fCw-aV-F0x"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="pickerView" destination="7yM-81-3B7" id="4IV-80-GOq"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="jIo-nh-uZG" id="oVQ-V4-udB"/>
@@ -236,7 +436,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="92N-zi-W7t">
                                 <rect key="frame" x="173" y="87" width="255" height="426"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sun_Big" translatesAutoresizingMaskIntoConstraints="NO" id="K9x-Wa-sFE">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K9x-Wa-sFE">
                                         <rect key="frame" x="83" y="20" width="90" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="ZT6-lz-Yhp"/>
@@ -334,28 +534,28 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yLi-kQ-Av5">
                                         <rect key="frame" x="68" y="312" width="120" height="48"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Wind" translatesAutoresizingMaskIntoConstraints="NO" id="Z7n-DJ-Cyv">
-                                                <rect key="frame" x="-2" y="0.0" width="25" height="25"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Wind" translatesAutoresizingMaskIntoConstraints="NO" id="Z7n-DJ-Cyv">
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="25" id="GzI-lO-8M9"/>
                                                     <constraint firstAttribute="height" constant="25" id="NeJ-u5-2tZ"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="– –" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ld-Hs-ZTe">
-                                                <rect key="frame" x="0.0" y="33" width="22" height="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="– –" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ld-Hs-ZTe">
+                                                <rect key="frame" x="0.0" y="33" width="25" height="15"/>
                                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="15"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Compass" translatesAutoresizingMaskIntoConstraints="NO" id="oGr-Pw-I09">
-                                                <rect key="frame" x="110" y="0.0" width="25" height="25"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Compass" translatesAutoresizingMaskIntoConstraints="NO" id="oGr-Pw-I09">
+                                                <rect key="frame" x="95" y="0.0" width="25" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="K61-Uv-wS5"/>
                                                     <constraint firstAttribute="width" constant="25" id="PJW-SV-23d"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="– –" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pj5-7s-Wn8">
-                                                <rect key="frame" x="95" y="33" width="55" height="15"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="– –" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pj5-7s-Wn8">
+                                                <rect key="frame" x="95" y="33" width="25" height="15"/>
                                                 <fontDescription key="fontDescription" name="ProximaNova-Semibold" family="Proxima Nova" pointSize="15"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -440,7 +640,13 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Today" image="Today" id="JBb-p4-0G4"/>
-                    <navigationItem key="navigationItem" id="yQo-om-YGO"/>
+                    <navigationItem key="navigationItem" id="yQo-om-YGO">
+                        <barButtonItem key="rightBarButtonItem" image="Location" id="XLA-e4-cFm">
+                            <connections>
+                                <segue destination="LSB-d8-ssZ" kind="presentation" id="4mp-1M-5Ht"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="chanceOfRainLabel" destination="OUP-rf-shH" id="4gK-Ko-dsy"/>
                         <outlet property="currentLocationImageView" destination="9Ep-Pt-VAc" id="ge7-qi-Ybh"/>
@@ -526,6 +732,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AddButton" width="65" height="65"/>
         <image name="Bar" width="320" height="50"/>
         <image name="CR" width="22" height="22"/>
         <image name="Celcius" width="21" height="15"/>
@@ -536,8 +743,11 @@
         <image name="Location" width="22" height="14"/>
         <image name="Rain" width="16" height="19"/>
         <image name="Settings" width="23" height="23"/>
-        <image name="Sun_Big" width="87" height="87"/>
         <image name="Today" width="24" height="24"/>
+        <image name="WhiteOverlay" width="320" height="195"/>
         <image name="Wind" width="25" height="16"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="k6T-u9-UYX"/>
+    </inferredMetricsTieBreakers>
 </document>

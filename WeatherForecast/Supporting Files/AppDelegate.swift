@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         configureAppearance()
-        DataManager.sharedManager.locationManager.startUpdatingLocation()
         AFNetworkActivityIndicatorManager.sharedManager().enabled = true
         return true
     }
@@ -37,6 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        DataManager.sharedManager.locationManager.startUpdatingLocation()
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -45,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private struct Appearance {
         static let TintColor        = UIColor(red: 47/255.0, green: 145/255.0, blue: 255/255.0, alpha: 1.0)
-        static let RegularFontName  = "ProximaNova"
+        static let RegularFontName  = "ProximaNova-Regular"
         static let SemiboldFontName = "ProximaNova-Semibold"
         static let BoldFontName     = "ProximaNova-Bold"
         static let LightFontName    = "ProximaNova-Light"
@@ -68,6 +69,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let barItemFont = UIFont(name: Appearance.SemiboldFontName, size: 16.0)!
         let barItemFontDictionary = NSDictionary(object: barItemFont, forKey: NSFontAttributeName)
         UIBarButtonItem.appearance().setTitleTextAttributes(barItemFontDictionary, forState: .Normal)
+        
+        // Search bar
+        let searchBarBackground = UIImage(named: "Input")?.resizableImageWithCapInsets(UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0))
+        let searchBarIcon = UIImage(named: "Search")
+        let searchBarClearIcon = UIImage(named: "Clear")
+        UISearchBar.appearance().setSearchFieldBackgroundImage(searchBarBackground, forState: .Normal)
+        UISearchBar.appearance().setImage(searchBarIcon, forSearchBarIcon: .Search, state: .Normal)
+        UISearchBar.appearance().setImage(searchBarClearIcon, forSearchBarIcon: .Clear, state: .Normal)
+        UISearchBar.appearance().searchTextPositionAdjustment = UIOffset(horizontal: 5.0, vertical: 1.0)
+        
+        let searchBarFont = UIFont(name: Appearance.RegularFontName, size: 16.0)!
+        
+        // Swift doesn't support appearanceWhenContainedIn:
+        // This is fine though, because we have a text field only in search bar
+        UITextField.appearance().textColor = Appearance.TintColor
+        UITextField.appearance().font = searchBarFont
     }
 
 }

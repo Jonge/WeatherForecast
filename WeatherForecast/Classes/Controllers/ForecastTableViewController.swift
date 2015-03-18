@@ -7,34 +7,124 @@
 //
 
 import UIKit
+import CoreData
 
-class ForecastTableViewController: UITableViewController {
+class ForecastTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    
+    private struct Constants {
+        static let CellHeight: CGFloat = 91.0
+        static let ReuseIdentifier     = "ForecastCell"
+    }
+    
+    lazy var fetchedResultsController: NSFetchedResultsController? = DataManager.sharedManager.createForecastFetchedResultsController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = NSLocalizedString("Forecast", comment: "Forecast")
+        
+        tableView.rowHeight = Constants.CellHeight
+        tableView.tableFooterView = UIView()
+        
+        fetchedResultsController?.delegate = self
     }
     
     
     // MARK: - UITableViewDataSource
     
-    private struct Constants {
-        static let ReuseIdentifier = "ForecastCell"
-    }
-    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return fetchedResultsController?.fetchedObjects?.count ?? 0
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Constants.ReuseIdentifier) as ForecastTableViewCell
+        cell.selectionStyle = .None
         
-        cell.imageView?.image = UIImage(named: "Sun")
-        cell.dayLabel.text = "Monday"
-        cell.conditionLabel.text = "Sunny"
+        let forecast = fetchedResultsController?.fetchedObjects?[indexPath.row] as Forecast
+        
+        let placeholderString = "– –"
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        cell.dayLabel.text = forecast.date != nil ? dateFormatter.stringFromDate(forecast.date!) : placeholderString
+        cell.conditionLabel.text = forecast.weatherDescription ?? placeholderString
+        
+        var temperature: String?
+        
+        switch DataManager.sharedManager.preferredTemperatureUnit() {
+        case .Celsius:
+            temperature = forecast.temperatureCelsius != nil ? "\(forecast.temperatureCelsius!)°" : placeholderString
+            
+        case .Fahrenheit:
+            temperature = forecast.temperatureFahrenheit != nil ? "\(forecast.temperatureFahrenheit!)°" : placeholderString
+        }
+        
+        cell.temperatureLabel.text = temperature
         
         return cell
+    }
+    
+    
+    // MARK: NSFetchedResultsControllerDelegate
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController,
+        didChangeObject anObject: AnyObject,
+        atIndexPath indexPath: NSIndexPath?,
+        forChangeType type: NSFetchedResultsChangeType,
+        newIndexPath: NSIndexPath?)
+    {
+        switch (type) {
+        case .Insert:
+            if let newIndexPath = newIndexPath {
+                tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            }
+            
+        case .Delete:
+            if let indexPath = indexPath {
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
+            
+        case .Update:
+            if let indexPath = indexPath {
+                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            }
+            
+        case .Move:
+            if let indexPath = indexPath {
+                if let newIndexPath = newIndexPath {
+                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+                    tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+                }
+            }
+        }
+    }
+    
+    func controller(controller: NSFetchedResultsController,
+        didChangeSection sectionInfo: NSFetchedResultsSectionInfo,
+        atIndex sectionIndex: Int,
+        forChangeType type: NSFetchedResultsChangeType)
+    {
+        switch(type) {
+            
+        case .Insert:
+            tableView.insertSections(NSIndexSet(index: sectionIndex),
+                withRowAnimation: UITableViewRowAnimation.Fade)
+            
+        case .Delete:
+            tableView.deleteSections(NSIndexSet(index: sectionIndex),
+                withRowAnimation: UITableViewRowAnimation.Fade)
+            
+        default:
+            break
+        }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.endUpdates()
     }
 
 }
