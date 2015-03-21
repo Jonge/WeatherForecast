@@ -27,6 +27,28 @@ class ForecastTableViewController: UITableViewController, NSFetchedResultsContro
         tableView.tableFooterView = UIView()
         
         fetchedResultsController?.delegate = self
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "locationChanged:", name: DataManager.Notifications.NewLocationNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataUpdated:", name: DataManager.Notifications.DataUpdatedNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "settingsChanged:", name: DataManager.Notifications.SettingsChangedNotification, object: nil)
+    }
+    
+    func reloadFetchedResultsController() -> NSFetchedResultsController? {
+        fetchedResultsController = DataManager.sharedManager.createForecastFetchedResultsController()
+        tableView.reloadData()
+        return fetchedResultsController
+    }
+    
+    func locationChanged(notification: NSNotification) {
+        reloadFetchedResultsController()
+    }
+    
+    func dataUpdated(notification: NSNotification) {
+        reloadFetchedResultsController()
+    }
+    
+    func settingsChanged(notification: NSNotification) {
+        reloadFetchedResultsController()
     }
     
     
@@ -60,6 +82,12 @@ class ForecastTableViewController: UITableViewController, NSFetchedResultsContro
         }
         
         cell.temperatureLabel.text = temperature
+        
+        if let weatherIconURLString = forecast.weatherIconURL {
+            cell.weatherImageView.setImageWithURL(NSURL(string: weatherIconURLString))
+        } else {
+            cell.weatherImageView.image = nil
+        }
         
         return cell
     }

@@ -34,6 +34,7 @@
 		BFC8FBBA1AB5D68B0071F21E /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8FBB91AB5D68B0071F21E /* PickerViewTableViewCell.swift */; };
 		BFC8FBC61AB62AEB0071F21E /* ParseWeatherOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8FBC51AB62AEB0071F21E /* ParseWeatherOperation.swift */; };
 		BFCFF7501AB307F800715388 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFCFF74E1AB307F800715388 /* DataModel.xcdatamodeld */; };
+		BFEC99281ABC8D67003BCC37 /* ConfigureAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEC99271ABC8D67003BCC37 /* ConfigureAppearance.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		BFC8FBC51AB62AEB0071F21E /* ParseWeatherOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ParseWeatherOperation.swift; path = Classes/Models/ParseWeatherOperation.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BFCFF74A1AB3020500715388 /* WeatherForecast-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeatherForecast-Bridging-Header.h"; sourceTree = "<group>"; };
 		BFCFF74F1AB307F800715388 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		BFEC99261ABC8D67003BCC37 /* ConfigureAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigureAppearance.h; path = "Supporting Files/ConfigureAppearance.h"; sourceTree = "<group>"; };
+		BFEC99271ABC8D67003BCC37 /* ConfigureAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigureAppearance.m; path = "Supporting Files/ConfigureAppearance.m"; sourceTree = "<group>"; };
 		E9E185B53E6A7F0677C9CDFB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -153,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				BF5A74611AAE2FF30060060A /* AppDelegate.swift */,
+				BFEC99261ABC8D67003BCC37 /* ConfigureAppearance.h */,
+				BFEC99271ABC8D67003BCC37 /* ConfigureAppearance.m */,
 				BFCFF74A1AB3020500715388 /* WeatherForecast-Bridging-Header.h */,
 				BF5A74631AAE30010060060A /* Info.plist */,
 			);
@@ -393,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFEC99281ABC8D67003BCC37 /* ConfigureAppearance.m in Sources */,
 				BF4E0EF41AB9D19E00ABAC61 /* SearchItemTableViewCell.swift in Sources */,
 				BFC8FBBA1AB5D68B0071F21E /* PickerViewTableViewCell.swift in Sources */,
 				BFC8FBC61AB62AEB0071F21E /* ParseWeatherOperation.swift in Sources */,

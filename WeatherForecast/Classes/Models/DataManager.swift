@@ -89,9 +89,9 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
     }()
     
     let apiParameters: [String: AnyObject] = [
-        "key": Constants.APIKey,
-        "format": "json",
-        "tp": 24,
+        "key":         Constants.APIKey,
+        "format":      "json",
+        "tp":          24,
         "num_of_days": 7
     ]
     
@@ -116,17 +116,26 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
                 if error == nil {
                     if matches?.count == 1 {
                         return matches?.first as? Location
+                    } else {
+                        if let entity = NSEntityDescription.entityForName("Location", inManagedObjectContext: managedObjectContext!) {
+                            if let location = NSManagedObject(entity: entity, insertIntoManagedObjectContext: managedObjectContext!) as? Location {
+                                location.currentLocation = true
+                                saveContext()
+                                return location
+                            }
+                        }
                     }
                 }
             }
             
             return nil
         }
-        
-        set {
-            self.currentLocation?.currentLocation = false
-            newValue?.currentLocation = true
-            saveContext()
+    }
+    
+    var selectedLocation: Location? {
+        didSet {
+            let notification = NSNotification(name: Notifications.NewLocationNotification, object: self)
+            NSNotificationCenter.defaultCenter().postNotification(notification)
         }
     }
     
@@ -148,6 +157,7 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
         if let entity = NSEntityDescription.entityForName("Location", inManagedObjectContext: managedObjectContext!) {
             if let location = NSManagedObject(entity: entity, insertIntoManagedObjectContext: managedObjectContext!) as? Location {
                 location.city = city
+                location.country = "lol"
                 location.latitude = latitude
                 location.longitude = longitude
                 saveContext()
@@ -196,8 +206,8 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
             var entity = NSEntityDescription.entityForName("Forecast", inManagedObjectContext: moc)
             fetchRequest.entity = entity
             
-            if let currentLocation = currentLocation {
-                fetchRequest.predicate = NSPredicate(format: "location = %@ AND location.currentLocation = %@", currentLocation, true)
+            if let selectedLocation = selectedLocation {
+                fetchRequest.predicate = NSPredicate(format: "location = %@", selectedLocation)
             } else {
                 return nil
             }
@@ -224,78 +234,26 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
         return nil
     }
     
-    func updateDataForLocation(location: Location) {
-        // TODO: Retrieve from API; for now, we use static data
-        
-        // Delete current forecast
-        location.forecast = NSSet()
-        
-        location.humidity = 53
-        location.pressure = 1019
-        location.rainPrecipitation = 2.4
-        location.temperatureCelsius = 21
-        location.temperatureFahrenheit = 70
-        location.weatherDescription = "Sunny"
-        location.weatherIconURL = nil
-        location.windDirection = "SE"
-        location.windSpeedKph = 15
-        location.windSpeedMph = 9
-        
-        if let entity = NSEntityDescription.entityForName("Forecast", inManagedObjectContext: managedObjectContext!) {
-            if let forecast = NSManagedObject(entity: entity, insertIntoManagedObjectContext: managedObjectContext!) as? Forecast {
-                forecast.date = NSDate(timeIntervalSince1970: 1459641600)
-                forecast.temperatureCelsius = 18
-                forecast.temperatureFahrenheit = 64
-                forecast.weatherDescription = "Cloudy"
-                forecast.weatherIconURL = nil
-                forecast.location = location
-            }
-        }
-        
-        if let entity = NSEntityDescription.entityForName("Forecast", inManagedObjectContext: managedObjectContext!) {
-            if let forecast = NSManagedObject(entity: entity, insertIntoManagedObjectContext: managedObjectContext!) as? Forecast {
-                forecast.date = NSDate(timeIntervalSince1970: 1462233600)
-                forecast.temperatureCelsius = 12
-                forecast.temperatureFahrenheit = 54
-                forecast.weatherDescription = "Rain"
-                forecast.weatherIconURL = nil
-                forecast.location = location
-            }
-        }
-        
-        if let entity = NSEntityDescription.entityForName("Forecast", inManagedObjectContext: managedObjectContext!) {
-            if let forecast = NSManagedObject(entity: entity, insertIntoManagedObjectContext: managedObjectContext!) as? Forecast {
-                forecast.date = NSDate(timeIntervalSince1970: 1464912000)
-                forecast.temperatureCelsius = 7
-                forecast.temperatureFahrenheit = 45
-                forecast.weatherDescription = "Storm"
-                forecast.weatherIconURL = nil
-                forecast.location = location
-            }
-        }
-        
-        saveContext()
-        
-        let notification = NSNotification(name: Notifications.DataUpdatedNotification, object: self)
-        NSNotificationCenter.defaultCenter().postNotification(notification)
-    }
-    
-    // TODO: Fix after API get online
-    /*func updateDataForCurrentLocation() -> NSURLSessionDataTask {
+    func updateDataForLocation(location: Location) -> NSURLSessionDataTask {
         var parameters = apiParameters
-        parameters.updateValue("\(currentLocation!.coordinate.latitude),\(currentLocation!.coordinate.longitude)", forKey: "q")
+        parameters.updateValue("\(location.latitude ?? 0.0),\(location.longitude ?? 0.0)", forKey: "q")
         
         return super.GET("weather.ashx", parameters: parameters, success: { task, responseObject in
             if responseObject is [String: AnyObject] {
                 let responseDictionary = responseObject as [String: AnyObject]
     
-                let parser = ParseWeatherOperation(dictionary: responseDictionary, managedObjectContext: self.createManagedObjectContextForPrivateQueue(), currentLocation: true) { managedObjectID in
-                    if let managedObjectID = managedObjectID {
-                        if let location = self.managedObjectContext?.objectWithID(managedObjectID) {
-                            NSLog(location.description)
+                let parser = ParseWeatherOperation(location: location, dictionary: responseDictionary, managedObjectContext: self.createManagedObjectContextForPrivateQueue()) { managedObjectID in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.saveContext()
+                        if let managedObjectID = managedObjectID {
+                            if let location = self.managedObjectContext?.objectWithID(managedObjectID) as? Location {
+                                let notification = NSNotification(name: Notifications.DataUpdatedNotification, object: self)
+                                NSNotificationCenter.defaultCenter().postNotification(notification)
+                            }
                         }
                     }
                 }
+                parser.start()
             }
         }, failure: { task, error in
             NSLog("%@", error)
@@ -315,7 +273,7 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
         }, failure: { task, error in
             NSLog("%@", error)
         })
-    }*/
+    }
     
     
     // MARK: - CLLocationManagerDelegate

@@ -20,9 +20,11 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     private struct Constants {
         static let LocationCellHeight: CGFloat = 91.0
         static let LocationCellReuseIdentifier = "LocationCell"
+        
+        static let TableViewBottomInset: CGFloat = 105.0
     }
     
-    lazy var fetchedResultsController: NSFetchedResultsController? = DataManager.sharedManager.createLocationsFetchedResultsController()
+    var fetchedResultsController: NSFetchedResultsController? = DataManager.sharedManager.createLocationsFetchedResultsController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,27 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.tableFooterView = UIView()
         
         fetchedResultsController?.delegate = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let tableViewInsets = self.tableView.contentInset
+        
+        tableView.contentInset = UIEdgeInsets(
+            top:    tableViewInsets.top,
+            left:   tableViewInsets.left,
+            bottom: Constants.TableViewBottomInset,
+            right:  tableViewInsets.right
+        )
+        
+        view.layoutSubviews()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        tableView.flashScrollIndicators()
     }
 
     
@@ -65,14 +88,28 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         
         cell.temperatureLabel.text = temperature
         
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            let location = fetchedResultsController?.fetchedObjects?[indexPath.row] as Location
-            DataManager.sharedManager.deleteLocation(location)
+        if let weatherIconURLString = location.weatherIconURL {
+            cell.weatherImageView.setImageWithURL(NSURL(string: weatherIconURLString))
+        } else {
+            cell.weatherImageView.image = nil
         }
+        
+        if location == DataManager.sharedManager.currentLocation {
+            cell.currentLocationImageView.image = UIImage(named: "CurrentLocation")
+            cell.rightButtons = nil
+        } else {
+            cell.currentLocationImageView.image = nil
+            
+            // Configure buttons
+            let deleteButton = MGSwipeButton(title: nil, icon: UIImage(named: "DeleteIcon"), backgroundColor: UIColor(red: 236/255.0, green: 113/255.0, blue: 54/255.0, alpha: 1.0), insets: UIEdgeInsetsMake(0.0, 35.0, 0.0, 35.0)) { cell in
+                let location = self.fetchedResultsController?.fetchedObjects?[indexPath.row] as Location
+                DataManager.sharedManager.deleteLocation(location)
+                return true
+            }
+            cell.rightButtons = [deleteButton]
+        }
+        
+        return cell
     }
     
     
@@ -80,7 +117,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let location = fetchedResultsController?.fetchedObjects?[indexPath.row] as Location
-        DataManager.sharedManager.currentLocation = location
+        DataManager.sharedManager.selectedLocation = location
         dismissViewControllerAnimated(true, completion: nil)
     }
     

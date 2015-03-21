@@ -67,7 +67,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iD5-st-Nss" id="fJU-FS-P65">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8mV-9J-4lB">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8mV-9J-4lB">
                                             <rect key="frame" x="15" y="15" width="60" height="60"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="Hz5-Pp-8Y4"/>
@@ -122,7 +122,7 @@
                                     <outlet property="conditionLabel" destination="lZg-AK-dQT" id="ef3-G3-cuu"/>
                                     <outlet property="dayLabel" destination="Ava-zX-Bdj" id="K7r-GG-SxQ"/>
                                     <outlet property="temperatureLabel" destination="3iQ-zJ-T0g" id="oNO-eY-cLd"/>
-                                    <outlet property="weatherImageView" destination="fJU-FS-P65" id="zgE-Ug-XU4"/>
+                                    <outlet property="weatherImageView" destination="8mV-9J-4lB" id="8IW-A9-3eX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -165,7 +165,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1UQ-Ge-Kf6" id="Pdv-vK-tGu">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nG3-Jq-Ufp">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nG3-Jq-Ufp">
                                                     <rect key="frame" x="15" y="15" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="1dv-AX-bqK"/>
@@ -653,6 +653,7 @@
                         <outlet property="locationLabel" destination="aGv-DL-oIB" id="z4k-8u-7Ya"/>
                         <outlet property="pressureLabel" destination="w9F-Oc-pjg" id="j3N-0Q-9QO"/>
                         <outlet property="rainQuantityLabel" destination="6jB-1A-Wbp" id="sfv-zg-wKY"/>
+                        <outlet property="shareButton" destination="haR-PY-lZy" id="Crv-vN-DTv"/>
                         <outlet property="weatherImageView" destination="K9x-Wa-sFE" id="Agc-wX-Swa"/>
                         <outlet property="weatherLabel" destination="Mx5-lP-0k1" id="zWy-YP-EE6"/>
                         <outlet property="windDirectionLabel" destination="pj5-7s-Wn8" id="e5R-X1-ejG"/>
@@ -683,7 +684,11 @@
         <scene sceneID="9Fa-0N-B9A">
             <objects>
                 <navigationController id="eF2-1H-gOu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Today" image="Today" id="qII-d7-XEf"/>
+                    <tabBarItem key="tabBarItem" title="Today" image="Today" selectedImage="TodaySelected" id="qII-d7-XEf">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="TodaySelected"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="70h-2w-cPC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -700,7 +705,11 @@
         <scene sceneID="iN5-EZ-gEl">
             <objects>
                 <navigationController id="D1v-fI-JIY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Forecast" image="Forecast" id="Fkt-or-WqE"/>
+                    <tabBarItem key="tabBarItem" title="Forecast" image="Forecast" selectedImage="ForecastSelected" id="Fkt-or-WqE">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="ForecastSelected"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hnf-57-ele">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -717,7 +726,11 @@
         <scene sceneID="ORA-hq-lnP">
             <objects>
                 <navigationController id="Bro-TH-tX8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" id="XRu-68-u56"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="Settings" selectedImage="SettingsSelected" id="XRu-68-u56">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="SettingsSelected"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8vk-Gi-GuH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -740,10 +753,13 @@
         <image name="CurrentLocation" width="11" height="11"/>
         <image name="Divider" width="127" height="1"/>
         <image name="Forecast" width="23" height="22"/>
+        <image name="ForecastSelected" width="23" height="22"/>
         <image name="Location" width="22" height="14"/>
         <image name="Rain" width="16" height="19"/>
         <image name="Settings" width="23" height="23"/>
+        <image name="SettingsSelected" width="23" height="23"/>
         <image name="Today" width="24" height="24"/>
+        <image name="TodaySelected" width="24" height="24"/>
         <image name="WhiteOverlay" width="320" height="195"/>
         <image name="Wind" width="25" height="16"/>
     </resources>

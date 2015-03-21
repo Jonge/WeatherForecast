@@ -13,7 +13,6 @@ class AddLocationTableViewController: UITableViewController, UISearchBarDelegate
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = NSLocalizedString("Search", comment: "Search")
-        searchBar.searchBarStyle = .Minimal
         searchBar.delegate = self
         return searchBar
     }()
@@ -77,6 +76,7 @@ class AddLocationTableViewController: UITableViewController, UISearchBarDelegate
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         // TODO: Send searchText to API and display results
+        
     }
 
 }

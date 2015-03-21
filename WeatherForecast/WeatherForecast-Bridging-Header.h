@@ -5,3 +5,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworkActivityIndicatorManager.h>
 #import <UIImageView+AFNetworking.h>
+#import <MGSwipeTableCell.h>
+#import <MGSwipeButton.h>
+
+#import "ConfigureAppearance.h"

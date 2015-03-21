@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         configureAppearance()
         AFNetworkActivityIndicatorManager.sharedManager().enabled = true
+        DataManager.sharedManager.selectedLocation = DataManager.sharedManager.currentLocation
         return true
     }
 
@@ -46,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private struct Appearance {
         static let TintColor        = UIColor(red: 47/255.0, green: 145/255.0, blue: 255/255.0, alpha: 1.0)
+        static let DarkColor        = UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1.0)
+        
         static let RegularFontName  = "ProximaNova-Regular"
         static let SemiboldFontName = "ProximaNova-Semibold"
         static let BoldFontName     = "ProximaNova-Bold"
@@ -54,6 +57,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func configureAppearance() {
         window?.tintColor = Appearance.TintColor
+        
+        // Tab bar items
+        let tabBarItemFont = UIFont(name: Appearance.SemiboldFontName, size: 10.0)!
+        let tabBarItemFontDictionary = NSDictionary(
+            objects: [
+                tabBarItemFont,
+                Appearance.DarkColor
+            ],
+            forKeys: [
+                NSFontAttributeName,
+                NSForegroundColorAttributeName
+            ]
+        )
+        let tabBarItemSelectedFontDictionary = NSDictionary(object: Appearance.TintColor, forKey: NSForegroundColorAttributeName)
+        UITabBarItem.appearance().setTitleTextAttributes(tabBarItemFontDictionary, forState: .Normal)
+        UITabBarItem.appearance().setTitleTextAttributes(tabBarItemSelectedFontDictionary, forState: .Selected)
         
         // Navigation bar
         let navigationTitleFont = UIFont(name: Appearance.SemiboldFontName, size: 18.0)!
@@ -81,10 +100,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let searchBarFont = UIFont(name: Appearance.RegularFontName, size: 16.0)!
         
-        // Swift doesn't support appearanceWhenContainedIn:
-        // This is fine though, because we have a text field only in search bar
-        UITextField.appearance().textColor = Appearance.TintColor
-        UITextField.appearance().font = searchBarFont
+        // Swift doesn't support appearanceWhenContainedIn:, we must use an Obj-C class
+        ConfigureAppearance.configureSearchBarWithTextColor(Appearance.TintColor, font: searchBarFont)
     }
 
 }

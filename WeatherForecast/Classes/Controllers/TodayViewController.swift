@@ -22,11 +22,14 @@ class TodayViewController: UIViewController {
     @IBOutlet weak var windSpeedLabel: UILabel!
     @IBOutlet weak var windDirectionLabel: UILabel!
     
+    @IBOutlet weak var shareButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = NSLocalizedString("Today", comment: "Today")
+        
+        shareButton.enabled = false
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "locationChanged:", name: DataManager.Notifications.NewLocationNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataUpdated:", name: DataManager.Notifications.DataUpdatedNotification, object: nil)
@@ -38,14 +41,7 @@ class TodayViewController: UIViewController {
     }
     
     func locationChanged(notification: NSNotification) {
-        let locality = notification.userInfo?["locality"] as? String
-        let country = notification.userInfo?["country"] as? String
-        
-        if locality != nil && country != nil {
-            locationLabel.text = "\(locality!), \(country!)"
-        } else {
-            locationLabel.text = "– –"
-        }
+        redrawData()
     }
     
     func dataUpdated(notification: NSNotification) {
@@ -57,7 +53,9 @@ class TodayViewController: UIViewController {
     }
     
     func redrawData() {
-        if let location = DataManager.sharedManager.currentLocation {
+        if let location = DataManager.sharedManager.selectedLocation {
+            shareButton.enabled = true
+            
             let placeholderString = "– –"
             
             if location.city != nil && location.country != nil {
@@ -91,7 +89,6 @@ class TodayViewController: UIViewController {
             
             windSpeedLabel.text = windSpeed
             
-            
             pressureLabel.text = location.pressure != nil ? "\(location.pressure!) hPa" : placeholderString
             windDirectionLabel.text = location.windDirection
             rainQuantityLabel.text = location.rainPrecipitation != nil ? "\(location.rainPrecipitation!) mm" : placeholderString
@@ -102,26 +99,37 @@ class TodayViewController: UIViewController {
             } else {
                 weatherImageView.image = nil
             }
+            
+            if location == DataManager.sharedManager.currentLocation {
+                currentLocationImageView.image = UIImage(named: "CurrentLocation")
+            } else {
+                currentLocationImageView.image = nil
+            }
+        } else {
+            shareButton.enabled = false
         }
     }
     
     @IBAction func shareButtonPressed(sender: UIButton) {
-        // TODO: Change title according to location
-        let shareTitle = "It is beautiful in Prague!"
-        let activityViewController = UIActivityViewController(activityItems: [shareTitle], applicationActivities: nil)
-        
-        activityViewController.excludedActivityTypes = [
-            UIActivityTypePrint,
-            UIActivityTypeAssignToContact,
-            UIActivityTypeSaveToCameraRoll,
-            UIActivityTypeAddToReadingList,
-            UIActivityTypePostToFlickr,
-            UIActivityTypePostToVimeo,
-            UIActivityTypePostToWeibo,
-            UIActivityTypePostToTencentWeibo
-        ]
-        
-        presentViewController(activityViewController, animated: true, completion: nil)
+        if let location = DataManager.sharedManager.selectedLocation {
+            if location.city != nil && location.weatherDescription != nil {
+                let shareTitle = "\(location.city!), \(location.weatherDescription!)"
+                let activityViewController = UIActivityViewController(activityItems: [shareTitle], applicationActivities: nil)
+                
+                activityViewController.excludedActivityTypes = [
+                    UIActivityTypePrint,
+                    UIActivityTypeAssignToContact,
+                    UIActivityTypeSaveToCameraRoll,
+                    UIActivityTypeAddToReadingList,
+                    UIActivityTypePostToFlickr,
+                    UIActivityTypePostToVimeo,
+                    UIActivityTypePostToWeibo,
+                    UIActivityTypePostToTencentWeibo
+                ]
+                
+                presentViewController(activityViewController, animated: true, completion: nil)
+            }
+        }
     }
     
 }

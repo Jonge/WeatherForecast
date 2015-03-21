@@ -11,24 +11,24 @@ import CoreData
 
 class ParseWeatherOperation: NSOperation {
     
+    var location: Location?
     var responseDictionary: [String: AnyObject]?
     var managedObjectContext: NSManagedObjectContext?
-    var currentLocation: Bool = false
     var completion: (NSManagedObjectID? -> ())?
     
     override init() {
         super.init()
     }
     
-    convenience init(dictionary: [String: AnyObject],
+    convenience init(location: Location,
+        dictionary: [String: AnyObject],
         managedObjectContext: NSManagedObjectContext,
-        currentLocation: Bool,
         completion: NSManagedObjectID? -> ())
     {
         self.init()
+        self.location = location
         self.responseDictionary = dictionary
         self.managedObjectContext = managedObjectContext
-        self.currentLocation = currentLocation
         self.completion = completion
     }
     
@@ -59,83 +59,85 @@ class ParseWeatherOperation: NSOperation {
     }
     
     override func main() {
+        assert(location != nil, "Fatal error: Location must not be nil")
         assert(responseDictionary != nil, "Fatal error: Response dictionary must not be nil")
         assert(managedObjectContext != nil, "Fatal error: Managed object context must not be nil")
         
-        var locationObject: Location?
-        
         managedObjectContext!.performBlockAndWait {
-            // TODO: Find current location object in database
-            if let entity = NSEntityDescription.entityForName("Location", inManagedObjectContext: self.managedObjectContext!) {
-                locationObject = NSManagedObject(entity: entity, insertIntoManagedObjectContext: self.managedObjectContext!) as? Location
-            }
-            
-            let dataDictionary        = self.responseDictionary![JSONKeys.DataDictionary] as? [String: AnyObject]
-            
-            // Current condition
-            let currentConditionArray = dataDictionary?[JSONKeys.CurrentConditionArray]   as? [AnyObject]
-            let currentCondition      = currentConditionArray?.first                      as? [String: AnyObject]
-            
-            locationObject?.temperatureCelsius    = currentCondition?[JSONKeys.TemperatureCelsius]    as? Int
-            locationObject?.temperatureFahrenheit = currentCondition?[JSONKeys.TemperatureFahrenheit] as? Int
-            locationObject?.pressure              = currentCondition?[JSONKeys.Pressure]              as? Int
-            locationObject?.windSpeedKph          = currentCondition?[JSONKeys.WindSpeedKph]          as? Int
-            locationObject?.windSpeedMph          = currentCondition?[JSONKeys.WindSpeedMph]          as? Int
-            locationObject?.windDirection         = currentCondition?[JSONKeys.WindDirection]         as? String
-            locationObject?.rainPrecipitation     = currentCondition?[JSONKeys.RainPrecipitation]     as? Double
-            locationObject?.humidity              = currentCondition?[JSONKeys.Humidity]              as? Int
-            
-            let weatherDescriptionArray = currentCondition?[JSONKeys.WeatherDescriptionArray] as? [AnyObject]
-            let weatherDescriptionDictionary = weatherDescriptionArray?.first as? [String: AnyObject]
-            locationObject?.weatherDescription = weatherDescriptionDictionary?[JSONKeys.WeatherDescription] as? String
-            
-            let weatherIconURLArray = currentCondition?[JSONKeys.WeatherIconURLArray] as? [AnyObject]
-            let weatherIconURLDictionary = weatherIconURLArray?.first as? [String: AnyObject]
-            locationObject?.weatherIconURL = weatherIconURLDictionary?[JSONKeys.WeatherIconURL] as? String
-            
-            // Forecast
-            let forecastArray = dataDictionary?[JSONKeys.WeatherArray] as? [AnyObject]
-            
-            if let forecastArray = forecastArray {
-                for forecastDictionary in forecastArray {
-                    if let entity = NSEntityDescription.entityForName("Location", inManagedObjectContext: self.managedObjectContext!) {
-                        let forecastObject = NSManagedObject(entity: entity, insertIntoManagedObjectContext: self.managedObjectContext!) as? Forecast
-                        
-                        // Assign forecast location
-                        forecastObject?.location = locationObject
-                        
-                        // Date
-                        if let dateString = forecastDictionary[JSONKeys.Date] as? String {
-                            let dateFormatter = NSDateFormatter()
-                            dateFormatter.dateFormat = "yyyy-MM-dd"
-                            forecastObject?.date = dateFormatter.dateFromString(dateString)
+            let locationObjectID = self.location?.objectID
+            if let locationObject = self.managedObjectContext?.objectWithID(locationObjectID!) as? Location {
+                NSLog("%@", self.responseDictionary!)
+                
+                let dataDictionary        = self.responseDictionary![JSONKeys.DataDictionary] as? [String: AnyObject]
+                
+                // Current condition
+                let currentConditionArray = dataDictionary?[JSONKeys.CurrentConditionArray]   as? [AnyObject]
+                let currentCondition      = currentConditionArray?.first                      as? [String: AnyObject]
+                
+                locationObject.temperatureCelsius    = (currentCondition?[JSONKeys.TemperatureCelsius]    as? String)?.toInt()
+                locationObject.temperatureFahrenheit = (currentCondition?[JSONKeys.TemperatureFahrenheit] as? String)?.toInt()
+                locationObject.pressure              = (currentCondition?[JSONKeys.Pressure]              as? String)?.toInt()
+                locationObject.windSpeedKph          = (currentCondition?[JSONKeys.WindSpeedKph]          as? String)?.toInt()
+                locationObject.windSpeedMph          = (currentCondition?[JSONKeys.WindSpeedMph]          as? String)?.toInt()
+                locationObject.windDirection         =  currentCondition?[JSONKeys.WindDirection]         as? String
+                locationObject.rainPrecipitation     = (currentCondition?[JSONKeys.RainPrecipitation]     as? NSString)?.doubleValue
+                locationObject.humidity              = (currentCondition?[JSONKeys.Humidity]              as? String)?.toInt()
+                
+                let weatherDescriptionArray = currentCondition?[JSONKeys.WeatherDescriptionArray] as? [AnyObject]
+                let weatherDescriptionDictionary = weatherDescriptionArray?.first as? [String: AnyObject]
+                locationObject.weatherDescription = weatherDescriptionDictionary?[JSONKeys.WeatherDescription] as? String
+                
+                let weatherIconURLArray = currentCondition?[JSONKeys.WeatherIconURLArray] as? [AnyObject]
+                let weatherIconURLDictionary = weatherIconURLArray?.first as? [String: AnyObject]
+                locationObject.weatherIconURL = weatherIconURLDictionary?[JSONKeys.WeatherIconURL] as? String
+                
+                // Forecast
+                locationObject.forecast = NSSet()
+                let forecastArray = dataDictionary?[JSONKeys.WeatherArray] as? [AnyObject]
+                
+                if let forecastArray = forecastArray {
+                    for forecastDictionary in forecastArray {
+                        if let entity = NSEntityDescription.entityForName("Forecast", inManagedObjectContext: self.managedObjectContext!) {
+                            let forecastObject = NSManagedObject(entity: entity, insertIntoManagedObjectContext: self.managedObjectContext!) as? Forecast
+                            
+                            // Assign forecast location
+                            forecastObject?.location = locationObject
+                            
+                            // Date
+                            if let dateString = forecastDictionary[JSONKeys.Date] as? String {
+                                let dateFormatter = NSDateFormatter()
+                                dateFormatter.dateFormat = "yyyy-MM-dd"
+                                forecastObject?.date = dateFormatter.dateFromString(dateString)
+                            }
+                            
+                            let weatherHourlyArray = forecastDictionary[JSONKeys.WeatherHourlyArray] as? [AnyObject]
+                            let weatherForWholeDay = weatherHourlyArray?.first as? [String: AnyObject]
+                            
+                            // Temperatures
+                            forecastObject?.temperatureCelsius = (weatherForWholeDay?[JSONKeys.ForecastTempCelsius] as? String)?.toInt()
+                            forecastObject?.temperatureFahrenheit = (weatherForWholeDay?[JSONKeys.ForecastTempFahrenheit] as? String)?.toInt()
+                            
+                            // Weather description
+                            let weatherDescriptionArray = weatherForWholeDay?[JSONKeys.WeatherDescriptionArray] as? [AnyObject]
+                            let weatherDescriptionDictionary = weatherDescriptionArray?.first as? [String: AnyObject]
+                            forecastObject?.weatherDescription = weatherDescriptionDictionary?[JSONKeys.WeatherDescription] as? String
+                            
+                            // Weather icon URL
+                            let weatherIconURLArray = weatherForWholeDay?[JSONKeys.WeatherIconURLArray] as? [AnyObject]
+                            let weatherIconURLDictionary = weatherIconURLArray?.first as? [String: AnyObject]
+                            forecastObject?.weatherIconURL = weatherIconURLDictionary?[JSONKeys.WeatherIconURL] as? String
                         }
-                        
-                        let weatherHourlyArray = forecastDictionary[JSONKeys.WeatherHourlyArray] as? [AnyObject]
-                        let weatherForWholeDay = weatherHourlyArray?.first as? [String: AnyObject]
-                        
-                        // Temperatures
-                        forecastObject?.temperatureCelsius = weatherForWholeDay?[JSONKeys.ForecastTempCelsius] as? NSNumber
-                        forecastObject?.temperatureFahrenheit = weatherForWholeDay?[JSONKeys.ForecastTempFahrenheit] as? NSNumber
-                        
-                        // Weather description
-                        let weatherDescriptionArray = weatherForWholeDay?[JSONKeys.WeatherDescriptionArray] as? [AnyObject]
-                        let weatherDescriptionDictionary = weatherDescriptionArray?.first as? [String: AnyObject]
-                        forecastObject?.weatherDescription = weatherDescriptionDictionary?[JSONKeys.WeatherDescription] as? String
-                        
-                        // Weather icon URL
-                        let weatherIconURLArray = weatherForWholeDay?[JSONKeys.WeatherIconURLArray] as? [AnyObject]
-                        let weatherIconURLDictionary = weatherIconURLArray?.first as? [String: AnyObject]
-                        forecastObject?.weatherIconURL = weatherIconURLDictionary?[JSONKeys.WeatherIconURL] as? String
                     }
                 }
-            }
-        }
-        
-        if !cancelled {
-            if let completion = completion {
-                let managedObjectID = locationObject?.objectID
-                completion(managedObjectID)
+                
+                self.managedObjectContext!.save(nil)
+                
+                if !self.cancelled {
+                    if let completion = self.completion {
+                        let managedObjectID = locationObject.objectID
+                        completion(managedObjectID)
+                    }
+                }
             }
         }
     }

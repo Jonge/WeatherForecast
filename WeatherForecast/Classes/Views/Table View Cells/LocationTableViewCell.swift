@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationTableViewCell: UITableViewCell {
+class LocationTableViewCell: MGSwipeTableCell {
     
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var currentLocationImageView: UIImageView!
