@@ -72,7 +72,7 @@ class SettingsTableViewController: UITableViewController, UIPickerViewDataSource
             
             switch modifiedIndexPathRow {
             case 0:
-                switch DataManager.sharedManager.preferredLengthUnit() {
+                switch DataManager.sharedManager.preferredLengthUnit {
                 case .Kilometers:
                     unitIndex = 0
                     
@@ -83,7 +83,7 @@ class SettingsTableViewController: UITableViewController, UIPickerViewDataSource
                     break
                 }
             case 1:
-                switch DataManager.sharedManager.preferredTemperatureUnit() {
+                switch DataManager.sharedManager.preferredTemperatureUnit {
                 case .Celsius:
                     unitIndex = 0
                     
@@ -114,7 +114,7 @@ class SettingsTableViewController: UITableViewController, UIPickerViewDataSource
         case Constants.TableViewRowIndexLength:
             cell.itemLabel.text = NSLocalizedString("Unit of length", comment: "Unit of length")
             
-            switch DataManager.sharedManager.preferredLengthUnit() {
+            switch DataManager.sharedManager.preferredLengthUnit {
             case .Kilometers:
                 cell.unitLabel.text = NSLocalizedString("Kilometers", comment: "Kilometers")
                 
@@ -125,7 +125,7 @@ class SettingsTableViewController: UITableViewController, UIPickerViewDataSource
         case Constants.TableViewRowIndexTemperature:
             cell.itemLabel.text = NSLocalizedString("Unit of temperature", comment: "Unit of temperature")
             
-            switch DataManager.sharedManager.preferredTemperatureUnit() {
+            switch DataManager.sharedManager.preferredTemperatureUnit {
             case .Celsius:
                 cell.unitLabel.text = NSLocalizedString("Celsius", comment: "Celsius")
                 
@@ -257,10 +257,10 @@ class SettingsTableViewController: UITableViewController, UIPickerViewDataSource
         case Constants.TableViewRowIndexLength:
             switch row {
             case 0:
-                DataManager.sharedManager.setPreferredLengthUnit(.Kilometers)
+                DataManager.sharedManager.preferredLengthUnit = .Kilometers
                 
             case 1:
-                DataManager.sharedManager.setPreferredLengthUnit(.Miles)
+                DataManager.sharedManager.preferredLengthUnit = .Miles
                 
             default:
                 break
@@ -269,10 +269,10 @@ class SettingsTableViewController: UITableViewController, UIPickerViewDataSource
         case Constants.TableViewRowIndexTemperature:
             switch row {
             case 0:
-                DataManager.sharedManager.setPreferredTemperatureUnit(.Celsius)
+                DataManager.sharedManager.preferredTemperatureUnit = .Celsius
                 
             case 1:
-                DataManager.sharedManager.setPreferredTemperatureUnit(.Fahrenheit)
+                DataManager.sharedManager.preferredTemperatureUnit = .Fahrenheit
                 
             default:
                 break

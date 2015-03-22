@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    private struct Appearance {
+    struct Appearance {
         static let TintColor        = UIColor(red: 47/255.0, green: 145/255.0, blue: 255/255.0, alpha: 1.0)
         static let DarkColor        = UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1.0)
         

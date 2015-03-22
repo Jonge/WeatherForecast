@@ -66,7 +66,7 @@ class TodayViewController: UIViewController {
             
             var temperature: String?
             
-            switch DataManager.sharedManager.preferredTemperatureUnit() {
+            switch DataManager.sharedManager.preferredTemperatureUnit {
             case .Celsius:
                 temperature = location.temperatureCelsius != nil ? "\(location.temperatureCelsius!)°C" : placeholderString
                 
@@ -79,7 +79,7 @@ class TodayViewController: UIViewController {
             
             var windSpeed: String?
             
-            switch DataManager.sharedManager.preferredLengthUnit() {
+            switch DataManager.sharedManager.preferredLengthUnit {
             case .Kilometers:
                 windSpeed = location.windSpeedKph != nil ? "\(location.windSpeedKph!) km/h" : placeholderString
                 

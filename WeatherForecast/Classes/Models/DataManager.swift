@@ -34,37 +34,40 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
         static let TemperatureUnitKey = "TemperatureUnitKey"
     }
     
-    
-    func preferredLengthUnit() -> LengthUnit {
-        let lengthUnit = NSUserDefaults.standardUserDefaults().stringForKey(UserDefaultKeys.LengthUnitKey)
-        if let lengthUnit = lengthUnit {
-            if let rawLengthUnit = LengthUnit(rawValue: lengthUnit) {
-                return rawLengthUnit
+    var preferredLengthUnit: LengthUnit {
+        get {
+            let lengthUnit = NSUserDefaults.standardUserDefaults().stringForKey(UserDefaultKeys.LengthUnitKey)
+            if let lengthUnit = lengthUnit {
+                if let rawLengthUnit = LengthUnit(rawValue: lengthUnit) {
+                    return rawLengthUnit
+                }
             }
+            return LengthUnit.Kilometers
         }
-        return LengthUnit.Kilometers
+        
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue.rawValue, forKey: UserDefaultKeys.LengthUnitKey)
+            NSUserDefaults.standardUserDefaults().synchronize()
+            postSettingsChangedNotification()
+        }
     }
     
-    func setPreferredLengthUnit(lengthUnit: LengthUnit) {
-        NSUserDefaults.standardUserDefaults().setObject(lengthUnit.rawValue, forKey: UserDefaultKeys.LengthUnitKey)
-        NSUserDefaults.standardUserDefaults().synchronize()
-        postSettingsChangedNotification()
-    }
-    
-    func preferredTemperatureUnit() -> TemperatureUnit {
-        let temperatureUnit = NSUserDefaults.standardUserDefaults().stringForKey(UserDefaultKeys.TemperatureUnitKey)
-        if let temperatureUnit = temperatureUnit {
-            if let rawTemperatureUnit = TemperatureUnit(rawValue: temperatureUnit) {
-                return rawTemperatureUnit
+    var preferredTemperatureUnit: TemperatureUnit {
+        get {
+            let temperatureUnit = NSUserDefaults.standardUserDefaults().stringForKey(UserDefaultKeys.TemperatureUnitKey)
+            if let temperatureUnit = temperatureUnit {
+                if let rawTemperatureUnit = TemperatureUnit(rawValue: temperatureUnit) {
+                    return rawTemperatureUnit
+                }
             }
+            return TemperatureUnit.Celsius
         }
-        return TemperatureUnit.Celsius
-    }
-    
-    func setPreferredTemperatureUnit(temperatureUnit: TemperatureUnit) {
-        NSUserDefaults.standardUserDefaults().setObject(temperatureUnit.rawValue, forKey: UserDefaultKeys.TemperatureUnitKey)
-        NSUserDefaults.standardUserDefaults().synchronize()
-        postSettingsChangedNotification()
+        
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue.rawValue, forKey: UserDefaultKeys.TemperatureUnitKey)
+            NSUserDefaults.standardUserDefaults().synchronize()
+            postSettingsChangedNotification()
+        }
     }
     
     func postSettingsChangedNotification() {
@@ -153,11 +156,11 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
     }
     
     
-    func addLocation(city: String, latitude: Float, longitude: Float) {
+    func addLocation(#city: String, country: String, latitude: Double, longitude: Double) {
         if let entity = NSEntityDescription.entityForName("Location", inManagedObjectContext: managedObjectContext!) {
             if let location = NSManagedObject(entity: entity, insertIntoManagedObjectContext: managedObjectContext!) as? Location {
                 location.city = city
-                location.country = "lol"
+                location.country = country
                 location.latitude = latitude
                 location.longitude = longitude
                 saveContext()
@@ -253,6 +256,8 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
                         }
                     }
                 }
+                // We don't need to pass this into NSOperationQueue
+                // because it is fast enough
                 parser.start()
             }
         }, failure: { task, error in
@@ -260,7 +265,7 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
         })
     }
     
-    func findSuggestedLocationsForQuery(query: String) -> NSURLSessionDataTask {
+    func findSuggestedLocationsForQuery(query: String, completion: (searchItems: [SearchItem]) -> ()) -> NSURLSessionDataTask {
         var parameters = apiParameters
         parameters.updateValue(query, forKey: "q")
         
@@ -268,7 +273,8 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
             if responseObject is [String: AnyObject] {
                 let responseDictionary = responseObject as [String: AnyObject]
                 
-                // TODO: Parse
+                let parser = ParseSearchItemsOperation(dictionary: responseDictionary, completion: completion)
+                parser.start()
             }
         }, failure: { task, error in
             NSLog("%@", error)

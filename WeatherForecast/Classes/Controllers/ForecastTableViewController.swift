@@ -73,7 +73,7 @@ class ForecastTableViewController: UITableViewController, NSFetchedResultsContro
         
         var temperature: String?
         
-        switch DataManager.sharedManager.preferredTemperatureUnit() {
+        switch DataManager.sharedManager.preferredTemperatureUnit {
         case .Celsius:
             temperature = forecast.temperatureCelsius != nil ? "\(forecast.temperatureCelsius!)°" : placeholderString
             

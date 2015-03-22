@@ -10,13 +10,15 @@ import Foundation
 
 class SearchItem {
     
-    var locationName: String?
-    var latitude: Float?
-    var longitude: Float?
+    var cityName: String?
+    var countryName: String?
+    var latitude: Double?
+    var longitude: Double?
     
-    convenience init(locationName: String, latitude: Float, longitude: Float) {
+    convenience init(cityName: String?, countryName: String?, latitude: Double, longitude: Double) {
         self.init()
-        self.locationName = locationName
+        self.cityName = cityName
+        self.countryName = countryName
         self.latitude = latitude
         self.longitude = longitude
     }

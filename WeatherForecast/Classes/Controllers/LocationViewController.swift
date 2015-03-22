@@ -78,7 +78,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         
         var temperature: String?
         
-        switch DataManager.sharedManager.preferredTemperatureUnit() {
+        switch DataManager.sharedManager.preferredTemperatureUnit {
         case .Celsius:
             temperature = location.temperatureCelsius != nil ? "\(location.temperatureCelsius!)°" : placeholderString
             

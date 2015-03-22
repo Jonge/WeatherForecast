@@ -17,15 +17,9 @@ class AddLocationTableViewController: UITableViewController, UISearchBarDelegate
         return searchBar
     }()
     
-    // TODO: Fill from server API
-    lazy var searchItemArray: [SearchItem] = {
-        let newYork = SearchItem(locationName: "New York", latitude: 40.730599, longitude: -73.986581)
-        let london = SearchItem(locationName: "London", latitude: 51.507322, longitude: -0.127647)
-        let moscow = SearchItem(locationName: "Moscow", latitude: 55.751634, longitude: 37.618704)
-        let tokyo = SearchItem(locationName: "Tokyo", latitude: 35.690041, longitude: 139.510395)
-        let sydney = SearchItem(locationName: "Sydney", latitude: -33.854816, longitude: 151.216454)
-        return [newYork, london, moscow, tokyo, sydney]
-    }()
+    var searchItemArray = [SearchItem]()
+    
+    var currentSearchTask: NSURLSessionDataTask?
     
     private struct Constants {
         static let SearchCellHeight: CGFloat = 40.0
@@ -43,6 +37,7 @@ class AddLocationTableViewController: UITableViewController, UISearchBarDelegate
     }
     
     @IBAction func closeButtonPressed(sender: UIBarButtonItem) {
+        currentSearchTask?.cancel()
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -55,9 +50,38 @@ class AddLocationTableViewController: UITableViewController, UISearchBarDelegate
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Constants.SearchCellReuseIdentifier) as SearchItemTableViewCell
-        
         let location = searchItemArray[indexPath.row]
-        cell.locationLabel.text = location.locationName
+        
+        let cityItemFont = UIFont(name: "ProximaNova-Semibold", size: 16.0)!
+        let countryItemFont = UIFont(name: "ProximaNova-Light", size: 16.0)!
+        let darkColor = UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1.0)
+        
+        let cityItemFontDictionary = NSDictionary(
+            objects: [
+                cityItemFont,
+                darkColor
+            ],
+            forKeys: [
+                NSFontAttributeName,
+                NSForegroundColorAttributeName
+            ]
+        )
+        
+        let countryItemFontDictionary = NSDictionary(
+            objects: [
+                countryItemFont,
+                darkColor
+            ],
+            forKeys: [
+                NSFontAttributeName,
+                NSForegroundColorAttributeName
+            ]
+        )
+        
+        let attributedText = NSMutableAttributedString(string: location.cityName!, attributes: cityItemFontDictionary)
+        attributedText.appendAttributedString(NSAttributedString(string: ", \(location.countryName!)", attributes: countryItemFontDictionary))
+        
+        cell.locationLabel.attributedText = attributedText
         
         return cell
     }
@@ -67,7 +91,7 @@ class AddLocationTableViewController: UITableViewController, UISearchBarDelegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let location = searchItemArray[indexPath.row]
-        DataManager.sharedManager.addLocation(location.locationName!, latitude: location.latitude!, longitude: location.longitude!)
+        DataManager.sharedManager.addLocation(city: location.cityName!, country: location.countryName!, latitude: location.latitude!, longitude: location.longitude!)
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -75,8 +99,11 @@ class AddLocationTableViewController: UITableViewController, UISearchBarDelegate
     // MARK: UISearchBarDelegate
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        // TODO: Send searchText to API and display results
-        
+        currentSearchTask?.cancel()
+        DataManager.sharedManager.findSuggestedLocationsForQuery(searchText) {
+            self.searchItemArray = $0
+            self.tableView.reloadData()
+        }
     }
 
 }
