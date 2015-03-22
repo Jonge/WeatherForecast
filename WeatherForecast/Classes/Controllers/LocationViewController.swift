@@ -18,10 +18,12 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     private struct Constants {
-        static let LocationCellHeight: CGFloat = 91.0
-        static let LocationCellReuseIdentifier = "LocationCell"
+        static let LocationCellHeight: CGFloat   = 91.0
+        static let LocationCellReuseIdentifier   = "LocationCell"
         
         static let TableViewBottomInset: CGFloat = 105.0
+        
+        static let DeleteButtonBackgroundColor   = UIColor(red: 236/255.0, green: 113/255.0, blue: 54/255.0, alpha: 1.0)
     }
     
     var fetchedResultsController: NSFetchedResultsController? = DataManager.sharedManager.createLocationsFetchedResultsController()
@@ -42,6 +44,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        // Modify insets to take our bottom button into account
         let tableViewInsets = self.tableView.contentInset
         
         tableView.contentInset = UIEdgeInsets(
@@ -101,7 +104,8 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.currentLocationImageView.image = nil
             
             // Configure buttons
-            let deleteButton = MGSwipeButton(title: nil, icon: UIImage(named: "DeleteIcon"), backgroundColor: UIColor(red: 236/255.0, green: 113/255.0, blue: 54/255.0, alpha: 1.0), insets: UIEdgeInsetsMake(0.0, 35.0, 0.0, 35.0)) { cell in
+            let deleteButtonBackgroundColor = Constants.DeleteButtonBackgroundColor
+            let deleteButton = MGSwipeButton(title: nil, icon: UIImage(named: "DeleteIcon"), backgroundColor: deleteButtonBackgroundColor, insets: UIEdgeInsetsMake(0.0, 35.0, 0.0, 35.0)) { cell in
                 let location = self.fetchedResultsController?.fetchedObjects?[indexPath.row] as Location
                 DataManager.sharedManager.deleteLocation(location)
                 return true

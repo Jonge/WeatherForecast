@@ -17,15 +17,10 @@ class GroupedTableSectionView: UIView {
         }
     }
     
-    private struct Constants {
-        static let fontName = "ProximaNova-Semibold"
-        static let fontSize: CGFloat = 14.0
-    }
-    
     private lazy var sectionTextLabel: UILabel = {
         let textLabel = UILabel()
-        textLabel.font = UIFont(name: Constants.fontName, size: Constants.fontSize)
-        textLabel.textColor = self.tintColor
+        textLabel.font = UIFont(name: Appearance.SemiboldFontName, size: 14)
+        textLabel.textColor = Appearance.TintColor
         self.addSubview(textLabel)
         
         // Add constraints

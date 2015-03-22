@@ -137,6 +137,9 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
     
     var selectedLocation: Location? {
         didSet {
+            if let location = oldValue {
+                updateDataForLocation(location)
+            }
             let notification = NSNotification(name: Notifications.NewLocationNotification, object: self)
             NSNotificationCenter.defaultCenter().postNotification(notification)
         }
@@ -155,6 +158,8 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
         static let ModelName  = "DataModel"
     }
     
+    
+    // MARK: 
     
     func addLocation(#city: String, country: String, latitude: Double, longitude: Double) {
         if let entity = NSEntityDescription.entityForName("Location", inManagedObjectContext: managedObjectContext!) {
@@ -237,6 +242,9 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
         return nil
     }
     
+    
+    // MARK: Server API methods
+    
     func updateDataForLocation(location: Location) -> NSURLSessionDataTask {
         var parameters = apiParameters
         parameters.updateValue("\(location.latitude ?? 0.0),\(location.longitude ?? 0.0)", forKey: "q")
@@ -260,7 +268,7 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
                 // because it is fast enough
                 parser.start()
             }
-        }, failure: { task, error in
+        }, failure: { _, error in
             NSLog("%@", error)
         })
     }
@@ -276,7 +284,7 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
                 let parser = ParseSearchItemsOperation(dictionary: responseDictionary, completion: completion)
                 parser.start()
             }
-        }, failure: { task, error in
+        }, failure: { _, error in
             NSLog("%@", error)
         })
     }

@@ -8,6 +8,16 @@
 
 import UIKit
 
+struct Appearance {
+    static let TintColor        = UIColor(red: 47/255.0, green: 145/255.0, blue: 255/255.0, alpha: 1.0)
+    static let DarkColor        = UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1.0)
+    
+    static let RegularFontName  = "ProximaNova-Regular"
+    static let SemiboldFontName = "ProximaNova-Semibold"
+    static let BoldFontName     = "ProximaNova-Bold"
+    static let LightFontName    = "ProximaNova-Light"
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -43,16 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-    
-    struct Appearance {
-        static let TintColor        = UIColor(red: 47/255.0, green: 145/255.0, blue: 255/255.0, alpha: 1.0)
-        static let DarkColor        = UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1.0)
-        
-        static let RegularFontName  = "ProximaNova-Regular"
-        static let SemiboldFontName = "ProximaNova-Semibold"
-        static let BoldFontName     = "ProximaNova-Bold"
-        static let LightFontName    = "ProximaNova-Light"
     }
     
     private func configureAppearance() {
@@ -105,4 +105,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-

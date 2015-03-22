@@ -18,13 +18,12 @@
 		BF5A745E1AAE2FB30060060A /* ForecastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5A745D1AAE2FB30060060A /* ForecastTableViewController.swift */; };
 		BF5A74601AAE2FD50060060A /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5A745F1AAE2FD50060060A /* SettingsTableViewController.swift */; };
 		BF5A74621AAE2FF30060060A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5A74611AAE2FF30060060A /* AppDelegate.swift */; };
-		BF5A746E1AAE36390060060A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF1BD0441AADE3A200A62442 /* Main.storyboard */; };
-		BF5A746F1AAE363E0060060A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF1BD0491AADE3A200A62442 /* LaunchScreen.xib */; };
 		BF5A74701AAE37050060060A /* ProximaNova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF5A746A1AAE31F80060060A /* ProximaNova-Bold.otf */; };
 		BF5A74711AAE37050060060A /* ProximaNova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF5A746B1AAE31F80060060A /* ProximaNova-Light.otf */; };
 		BF5A74721AAE37050060060A /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF5A746C1AAE31F80060060A /* ProximaNova-Regular.otf */; };
 		BF5A74731AAE37050060060A /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF5A746D1AAE31F80060060A /* ProximaNova-Semibold.otf */; };
 		BF5A74751AAE3A640060060A /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5A74741AAE3A640060060A /* LocationViewController.swift */; };
+		BF8AE8051ABF2D78006F94CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF8AE8031ABF2D78006F94CA /* Main.storyboard */; };
 		BF9960431AAF347800F31AF3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9960421AAF347800F31AF3 /* DataManager.swift */; };
 		BF9BB83A1AAF1A6C00CDA465 /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9BB8391AAF1A6C00CDA465 /* ForecastTableViewCell.swift */; };
 		BF9BB83C1AAF224800CDA465 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9BB83B1AAF224800CDA465 /* SettingsTableViewCell.swift */; };
@@ -52,8 +51,6 @@
 		9B55F5421F79FC8D95212243 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B0274FA7245E864AA17D2FE9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BF1BD0391AADE3A200A62442 /* WeatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BF1BD0451AADE3A200A62442 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BF1BD04A1AADE3A200A62442 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		BF1BD0501AADE3A200A62442 /* WeatherForecastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherForecastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1BD0551AADE3A200A62442 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF1BD0561AADE3A200A62442 /* WeatherForecastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastTests.swift; sourceTree = "<group>"; };
@@ -72,6 +69,7 @@
 		BF5A746C1AAE31F80060060A /* ProximaNova-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Regular.otf"; path = "Resources/Fonts/ProximaNova-Regular.otf"; sourceTree = "<group>"; };
 		BF5A746D1AAE31F80060060A /* ProximaNova-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ProximaNova-Semibold.otf"; path = "Resources/Fonts/ProximaNova-Semibold.otf"; sourceTree = "<group>"; };
 		BF5A74741AAE3A640060060A /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationViewController.swift; path = Classes/Controllers/LocationViewController.swift; sourceTree = "<group>"; };
+		BF8AE8041ABF2D78006F94CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Classes/Views/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF9960421AAF347800F31AF3 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DataManager.swift; path = Classes/Models/DataManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		BF9BB8391AAF1A6C00CDA465 /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForecastTableViewCell.swift; path = "Classes/Views/Table View Cells/ForecastTableViewCell.swift"; sourceTree = "<group>"; };
 		BF9BB83B1AAF224800CDA465 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewCell.swift; path = "Classes/Views/Table View Cells/SettingsTableViewCell.swift"; sourceTree = "<group>"; };
@@ -210,8 +208,7 @@
 		BF1BD0621AADE5BB00A62442 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BF1BD0441AADE3A200A62442 /* Main.storyboard */,
-				BF1BD0491AADE3A200A62442 /* LaunchScreen.xib */,
+				BF8AE8031ABF2D78006F94CA /* Main.storyboard */,
 				BF9BB8381AAF1A4400CDA465 /* Table View Cells */,
 			);
 			name = Views;
@@ -347,10 +344,9 @@
 				BF5A74701AAE37050060060A /* ProximaNova-Bold.otf in Resources */,
 				BF5A74711AAE37050060060A /* ProximaNova-Light.otf in Resources */,
 				BF5A74721AAE37050060060A /* ProximaNova-Regular.otf in Resources */,
+				BF8AE8051ABF2D78006F94CA /* Main.storyboard in Resources */,
 				BF5A74731AAE37050060060A /* ProximaNova-Semibold.otf in Resources */,
 				BF5A745A1AAE2E760060060A /* Images.xcassets in Resources */,
-				BF5A746E1AAE36390060060A /* Main.storyboard in Resources */,
-				BF5A746F1AAE363E0060060A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,20 +439,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		BF1BD0441AADE3A200A62442 /* Main.storyboard */ = {
+		BF8AE8031ABF2D78006F94CA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BF1BD0451AADE3A200A62442 /* Base */,
+				BF8AE8041ABF2D78006F94CA /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		BF1BD0491AADE3A200A62442 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BF1BD04A1AADE3A200A62442 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -544,6 +532,7 @@
 			baseConfigurationReference = B0274FA7245E864AA17D2FE9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/WeatherForecast/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
@@ -559,6 +548,7 @@
 			baseConfigurationReference = 9B55F5421F79FC8D95212243 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/WeatherForecast/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;

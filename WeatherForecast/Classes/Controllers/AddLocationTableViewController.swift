@@ -52,9 +52,9 @@ class AddLocationTableViewController: UITableViewController, UISearchBarDelegate
         let cell = tableView.dequeueReusableCellWithIdentifier(Constants.SearchCellReuseIdentifier) as SearchItemTableViewCell
         let location = searchItemArray[indexPath.row]
         
-        let cityItemFont = UIFont(name: "ProximaNova-Semibold", size: 16.0)!
-        let countryItemFont = UIFont(name: "ProximaNova-Light", size: 16.0)!
-        let darkColor = UIColor(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1.0)
+        let cityItemFont = UIFont(name: Appearance.SemiboldFontName, size: 16.0)!
+        let countryItemFont = UIFont(name: Appearance.LightFontName, size: 16.0)!
+        let darkColor = Appearance.DarkColor
         
         let cityItemFontDictionary = NSDictionary(
             objects: [
