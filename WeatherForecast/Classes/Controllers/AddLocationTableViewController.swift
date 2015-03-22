@@ -56,27 +56,15 @@ class AddLocationTableViewController: UITableViewController, UISearchBarDelegate
         let countryItemFont = UIFont(name: Appearance.LightFontName, size: 16.0)!
         let darkColor = Appearance.DarkColor
         
-        let cityItemFontDictionary = NSDictionary(
-            objects: [
-                cityItemFont,
-                darkColor
-            ],
-            forKeys: [
-                NSFontAttributeName,
-                NSForegroundColorAttributeName
-            ]
-        )
+        let cityItemFontDictionary = [
+            NSFontAttributeName: cityItemFont,
+            NSForegroundColorAttributeName: darkColor
+        ]
         
-        let countryItemFontDictionary = NSDictionary(
-            objects: [
-                countryItemFont,
-                darkColor
-            ],
-            forKeys: [
-                NSFontAttributeName,
-                NSForegroundColorAttributeName
-            ]
-        )
+        let countryItemFontDictionary = [
+            NSFontAttributeName: countryItemFont,
+            NSForegroundColorAttributeName: darkColor
+        ]
         
         let attributedText = NSMutableAttributedString(string: location.cityName!, attributes: cityItemFontDictionary)
         attributedText.appendAttributedString(NSAttributedString(string: ", \(location.countryName!)", attributes: countryItemFontDictionary))

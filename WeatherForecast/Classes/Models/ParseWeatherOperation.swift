@@ -130,7 +130,8 @@ class ParseWeatherOperation: NSOperation {
                     }
                 }
                 
-                self.managedObjectContext!.save(nil)
+                var error: NSError?
+                self.managedObjectContext!.save(&error)
                 
                 if !self.cancelled {
                     if let completion = self.completion {

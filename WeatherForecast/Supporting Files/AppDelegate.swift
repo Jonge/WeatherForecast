@@ -60,23 +60,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Tab bar items
         let tabBarItemFont = UIFont(name: Appearance.SemiboldFontName, size: 10.0)!
-        let tabBarItemFontDictionary = NSDictionary(
-            objects: [
-                tabBarItemFont,
-                Appearance.DarkColor
-            ],
-            forKeys: [
-                NSFontAttributeName,
-                NSForegroundColorAttributeName
-            ]
-        )
-        let tabBarItemSelectedFontDictionary = NSDictionary(object: Appearance.TintColor, forKey: NSForegroundColorAttributeName)
+        let tabBarItemFontDictionary = [
+            NSFontAttributeName: tabBarItemFont,
+            NSForegroundColorAttributeName: Appearance.DarkColor
+        ]
+        
+        let tabBarItemSelectedFontDictionary = [Appearance.TintColor: NSForegroundColorAttributeName]
         UITabBarItem.appearance().setTitleTextAttributes(tabBarItemFontDictionary, forState: .Normal)
         UITabBarItem.appearance().setTitleTextAttributes(tabBarItemSelectedFontDictionary, forState: .Selected)
         
         // Navigation bar
         let navigationTitleFont = UIFont(name: Appearance.SemiboldFontName, size: 18.0)!
-        let navigationBarTitleAttributes = NSDictionary(object: navigationTitleFont, forKey: NSFontAttributeName)
+        let navigationBarTitleAttributes = [navigationTitleFont : NSFontAttributeName]
         UINavigationBar.appearance().titleTextAttributes = navigationBarTitleAttributes
         
         let navigationBarBackground = UIImage(named: "White")
@@ -86,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Bar items
         let barItemFont = UIFont(name: Appearance.SemiboldFontName, size: 16.0)!
-        let barItemFontDictionary = NSDictionary(object: barItemFont, forKey: NSFontAttributeName)
+        let barItemFontDictionary = [barItemFont : NSFontAttributeName]
         UIBarButtonItem.appearance().setTitleTextAttributes(barItemFontDictionary, forState: .Normal)
         
         // Search bar

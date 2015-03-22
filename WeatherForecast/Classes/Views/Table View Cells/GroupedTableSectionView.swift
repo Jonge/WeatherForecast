@@ -17,9 +17,16 @@ class GroupedTableSectionView: UIView {
         }
     }
     
-    private lazy var sectionTextLabel: UILabel = {
+    private struct Constants {
+        static let TopMargin: CGFloat    = 25.0
+        static let BottomMargin: CGFloat = 5.0
+        static let LeftMargin: CGFloat   = 15.0
+        static let RightMargin: CGFloat  = 15.0
+    }
+    
+    private lazy var sectionTextLabel: UILabel = { [unowned self] in
         let textLabel = UILabel()
-        textLabel.font = UIFont(name: Appearance.SemiboldFontName, size: 14)
+        textLabel.font = UIFont(name: Appearance.SemiboldFontName, size: 14.0)
         textLabel.textColor = Appearance.TintColor
         self.addSubview(textLabel)
         
@@ -27,9 +34,15 @@ class GroupedTableSectionView: UIView {
         textLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
         
         let viewBindingsDictionary = ["textLabel": textLabel]
+        let metricsDictionary = [
+            "topMargin":    Constants.TopMargin,
+            "bottomMargin": Constants.BottomMargin,
+            "leftMargin":   Constants.LeftMargin,
+            "rightMargin":  Constants.RightMargin,
+        ]
         
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(15)-[textLabel]-(15)-|", options: nil, metrics: nil, views: viewBindingsDictionary))
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(25)-[textLabel]-(5)-|", options: nil, metrics: nil, views: viewBindingsDictionary))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(leftMargin)-[textLabel]-(rightMargin)-|", options: nil, metrics: metricsDictionary, views: viewBindingsDictionary))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(topMargin)-[textLabel]-(bottomMargin)-|", options: nil, metrics: metricsDictionary, views: viewBindingsDictionary))
         
         return textLabel
     }()
@@ -46,7 +59,9 @@ class GroupedTableSectionView: UIView {
     }
     
     override func intrinsicContentSize() -> CGSize {
-        return CGSize(width: sectionTextLabel.frame.size.width + 30.0, height: sectionTextLabel.frame.size.height + 30.0)
+        return CGSize(
+            width: sectionTextLabel.frame.size.width + Constants.LeftMargin + Constants.RightMargin,
+            height: sectionTextLabel.frame.size.height + Constants.TopMargin + Constants.BottomMargin)
     }
 
 }

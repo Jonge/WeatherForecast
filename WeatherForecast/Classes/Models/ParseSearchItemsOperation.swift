@@ -59,6 +59,7 @@ class ParseSearchItemsOperation: NSOperation {
                 }
             }
         }
+        
         if let completion = self.completion {
             completion(searchItemsArray)
         }

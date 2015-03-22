@@ -159,7 +159,7 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
     }
     
     
-    // MARK: 
+    // MARK: - Database methods
     
     func addLocation(#city: String, country: String, latitude: Double, longitude: Double) {
         if let entity = NSEntityDescription.entityForName("Location", inManagedObjectContext: managedObjectContext!) {
@@ -243,7 +243,7 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
     }
     
     
-    // MARK: Server API methods
+    // MARK: - Server API methods
     
     func updateDataForLocation(location: Location) -> NSURLSessionDataTask {
         var parameters = apiParameters
@@ -273,7 +273,7 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
         })
     }
     
-    func findSuggestedLocationsForQuery(query: String, completion: (searchItems: [SearchItem]) -> ()) -> NSURLSessionDataTask {
+    func findSuggestedLocationsForQuery(query: String, completion: [SearchItem] -> ()) -> NSURLSessionDataTask {
         var parameters = apiParameters
         parameters.updateValue(query, forKey: "q")
         
