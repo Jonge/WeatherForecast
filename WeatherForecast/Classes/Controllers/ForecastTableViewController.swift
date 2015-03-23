@@ -33,6 +33,10 @@ class ForecastTableViewController: UITableViewController, NSFetchedResultsContro
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "settingsChanged:", name: DataManager.Notifications.SettingsChangedNotification, object: nil)
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     func reloadFetchedResultsController() -> NSFetchedResultsController? {
         fetchedResultsController = DataManager.sharedManager.createForecastFetchedResultsController()
         tableView.reloadData()

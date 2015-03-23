@@ -100,7 +100,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="Ava-zX-Bdj" secondAttribute="trailing" id="jZx-oD-RvN"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3iQ-zJ-T0g">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text="20°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3iQ-zJ-T0g">
                                             <rect key="frame" x="504" y="17" width="81" height="55"/>
                                             <fontDescription key="fontDescription" name="ProximaNova-Light" family="Proxima Nova" pointSize="55"/>
                                             <color key="textColor" red="0.1843137255" green="0.56862745100000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -207,7 +207,7 @@
                                                         <constraint firstAttribute="bottom" secondItem="iUo-aX-Oec" secondAttribute="bottom" id="xos-IS-RWf"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="143-Rk-28f">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text="20°" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="143-Rk-28f">
                                                     <rect key="frame" x="504" y="17" width="81" height="55"/>
                                                     <fontDescription key="fontDescription" name="ProximaNova-Light" family="Proxima Nova" pointSize="55"/>
                                                     <color key="textColor" red="0.1843137255" green="0.56862745100000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -635,8 +635,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="92N-zi-W7t" secondAttribute="trailing" constant="15" id="0eh-Yu-TUN"/>
                             <constraint firstAttribute="centerY" secondItem="92N-zi-W7t" secondAttribute="centerY" id="5iD-q3-lGg"/>
                             <constraint firstAttribute="centerX" secondItem="92N-zi-W7t" secondAttribute="centerX" id="Hgd-6p-EJi"/>
+                            <constraint firstItem="92N-zi-W7t" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2KK-5F-Ngs" secondAttribute="leading" constant="15" id="g8K-GN-6IE"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Today" image="Today" id="JBb-p4-0G4"/>
@@ -764,6 +766,6 @@
         <image name="Wind" width="25" height="16"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="k6T-u9-UYX"/>
+        <segue reference="4mp-1M-5Ht"/>
     </inferredMetricsTieBreakers>
 </document>

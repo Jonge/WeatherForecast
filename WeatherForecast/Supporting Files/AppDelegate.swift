@@ -65,13 +65,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSForegroundColorAttributeName: Appearance.DarkColor
         ]
         
-        let tabBarItemSelectedFontDictionary = [Appearance.TintColor: NSForegroundColorAttributeName]
+        let tabBarItemSelectedFontDictionary = [NSForegroundColorAttributeName: Appearance.TintColor]
         UITabBarItem.appearance().setTitleTextAttributes(tabBarItemFontDictionary, forState: .Normal)
         UITabBarItem.appearance().setTitleTextAttributes(tabBarItemSelectedFontDictionary, forState: .Selected)
         
         // Navigation bar
         let navigationTitleFont = UIFont(name: Appearance.SemiboldFontName, size: 18.0)!
-        let navigationBarTitleAttributes = [navigationTitleFont : NSFontAttributeName]
+        let navigationBarTitleAttributes = [NSFontAttributeName: navigationTitleFont]
         UINavigationBar.appearance().titleTextAttributes = navigationBarTitleAttributes
         
         let navigationBarBackground = UIImage(named: "White")
@@ -81,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Bar items
         let barItemFont = UIFont(name: Appearance.SemiboldFontName, size: 16.0)!
-        let barItemFontDictionary = [barItemFont : NSFontAttributeName]
+        let barItemFontDictionary = [NSFontAttributeName: barItemFont]
         UIBarButtonItem.appearance().setTitleTextAttributes(barItemFontDictionary, forState: .Normal)
         
         // Search bar

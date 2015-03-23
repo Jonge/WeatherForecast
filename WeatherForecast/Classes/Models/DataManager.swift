@@ -30,7 +30,7 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
     }
     
     private struct UserDefaultKeys {
-        static let LengthUnitKey = "LengthUnitKey"
+        static let LengthUnitKey      = "LengthUnitKey"
         static let TemperatureUnitKey = "TemperatureUnitKey"
     }
     
@@ -70,7 +70,7 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
         }
     }
     
-    func postSettingsChangedNotification() {
+    private func postSettingsChangedNotification() {
         let settingsChangedNotification = NSNotification(name: Notifications.SettingsChangedNotification, object: self, userInfo: nil)
         NSNotificationCenter.defaultCenter().postNotification(settingsChangedNotification)
     }
@@ -91,15 +91,15 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
         return locationManager
     }()
     
-    let apiParameters: [String: AnyObject] = [
+    private let apiParameters: [String: AnyObject] = [
         "key":         Constants.APIKey,
         "format":      "json",
         "tp":          24,
         "num_of_days": 7
     ]
     
-    var didLoadLocationFromCache: Bool = false
-    var currentDataTask: NSURLSessionDataTask?
+    private var didLoadLocationFromCache: Bool = false
+    private var currentDataTask: NSURLSessionDataTask?
     
     var currentLocation: Location? {
         get {
@@ -340,7 +340,7 @@ class DataManager: AFHTTPSessionManager, CLLocationManagerDelegate {
     
     // MARK: - Core Data stack
     
-    func createManagedObjectContextForPrivateQueue() -> NSManagedObjectContext {
+    private func createManagedObjectContextForPrivateQueue() -> NSManagedObjectContext {
         let privateQueueManagedObjectContext = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
         privateQueueManagedObjectContext.parentContext = managedObjectContext
         return privateQueueManagedObjectContext

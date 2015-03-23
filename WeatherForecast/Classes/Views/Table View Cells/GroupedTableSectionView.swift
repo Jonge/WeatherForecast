@@ -27,7 +27,7 @@ class GroupedTableSectionView: UIView {
     private lazy var sectionTextLabel: UILabel = { [unowned self] in
         let textLabel = UILabel()
         textLabel.font = UIFont(name: Appearance.SemiboldFontName, size: 14.0)
-        textLabel.textColor = Appearance.TintColor
+        textLabel.textColor = self.tintColor
         self.addSubview(textLabel)
         
         // Add constraints
@@ -60,8 +60,8 @@ class GroupedTableSectionView: UIView {
     
     override func intrinsicContentSize() -> CGSize {
         return CGSize(
-            width: sectionTextLabel.frame.size.width + Constants.LeftMargin + Constants.RightMargin,
-            height: sectionTextLabel.frame.size.height + Constants.TopMargin + Constants.BottomMargin)
+            width:  sectionTextLabel.frame.size.width  + Constants.LeftMargin + Constants.RightMargin,
+            height: sectionTextLabel.frame.size.height + Constants.TopMargin  + Constants.BottomMargin)
     }
 
 }

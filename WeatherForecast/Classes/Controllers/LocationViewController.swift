@@ -105,7 +105,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
             
             // Configure buttons
             let deleteButtonBackgroundColor = Constants.DeleteButtonBackgroundColor
-            let deleteButton = MGSwipeButton(title: nil, icon: UIImage(named: "DeleteIcon"), backgroundColor: deleteButtonBackgroundColor, insets: UIEdgeInsetsMake(0.0, 35.0, 0.0, 35.0)) { cell in
+            let deleteButton = MGSwipeButton(title: nil, icon: UIImage(named: "DeleteIcon"), backgroundColor: deleteButtonBackgroundColor, insets: UIEdgeInsetsMake(0.0, 35.0, 0.0, 35.0)) { _ in
                 let location = self.fetchedResultsController?.fetchedObjects?[indexPath.row] as Location
                 DataManager.sharedManager.deleteLocation(location)
                 return true
