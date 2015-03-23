@@ -65,9 +65,7 @@ class ParseWeatherOperation: NSOperation {
         
         managedObjectContext!.performBlockAndWait {
             let locationObjectID = self.location?.objectID
-            if let locationObject = self.managedObjectContext?.objectWithID(locationObjectID!) as? Location {
-                NSLog("%@", self.responseDictionary!)
-                
+            if let locationObject = self.managedObjectContext?.objectWithID(locationObjectID!) as? Location {                
                 let dataDictionary        = self.responseDictionary![JSONKeys.DataDictionary] as? [String: AnyObject]
                 
                 // Current condition

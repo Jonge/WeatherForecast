@@ -23,13 +23,13 @@
 		BF5A74721AAE37050060060A /* ProximaNova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF5A746C1AAE31F80060060A /* ProximaNova-Regular.otf */; };
 		BF5A74731AAE37050060060A /* ProximaNova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF5A746D1AAE31F80060060A /* ProximaNova-Semibold.otf */; };
 		BF5A74751AAE3A640060060A /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5A74741AAE3A640060060A /* LocationViewController.swift */; };
-		BF8AE8051ABF2D78006F94CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF8AE8031ABF2D78006F94CA /* Main.storyboard */; };
 		BF9960431AAF347800F31AF3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9960421AAF347800F31AF3 /* DataManager.swift */; };
 		BF9BB83A1AAF1A6C00CDA465 /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9BB8391AAF1A6C00CDA465 /* ForecastTableViewCell.swift */; };
 		BF9BB83C1AAF224800CDA465 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9BB83B1AAF224800CDA465 /* SettingsTableViewCell.swift */; };
 		BF9BB83E1AAF230600CDA465 /* GroupedTableSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9BB83D1AAF230600CDA465 /* GroupedTableSectionView.swift */; };
 		BFA317891AB8905E008FF5D4 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA317881AB8905E008FF5D4 /* Forecast.swift */; };
 		BFA3178B1AB8905F008FF5D4 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA3178A1AB8905F008FF5D4 /* Location.swift */; };
+		BFBC07E41AC0318F00259328 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF8AE8031ABF2D78006F94CA /* Main.storyboard */; };
 		BFC8FBB81AB5AD210071F21E /* AddLocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8FBB71AB5AD210071F21E /* AddLocationTableViewController.swift */; };
 		BFC8FBBA1AB5D68B0071F21E /* PickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8FBB91AB5D68B0071F21E /* PickerViewTableViewCell.swift */; };
 		BFC8FBC61AB62AEB0071F21E /* ParseWeatherOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC8FBC51AB62AEB0071F21E /* ParseWeatherOperation.swift */; };
@@ -341,10 +341,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFBC07E41AC0318F00259328 /* Main.storyboard in Resources */,
 				BF5A74701AAE37050060060A /* ProximaNova-Bold.otf in Resources */,
 				BF5A74711AAE37050060060A /* ProximaNova-Light.otf in Resources */,
 				BF5A74721AAE37050060060A /* ProximaNova-Regular.otf in Resources */,
-				BF8AE8051ABF2D78006F94CA /* Main.storyboard in Resources */,
 				BF5A74731AAE37050060060A /* ProximaNova-Semibold.otf in Resources */,
 				BF5A745A1AAE2E760060060A /* Images.xcassets in Resources */,
 			);
